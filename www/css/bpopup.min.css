@@ -1,0 +1,41 @@
+.bbutton.strong{color:#7ccd60;}
+.bbutton{
+  background-color:#F05222;
+  border-radius:10px;
+  box-shadow:0 2px 3px rgba(0,0,0,0.3);
+  color:#fff;
+  cursor:pointer;
+  display:inline-block;
+  padding:10px 20px;
+  text-align:center;
+  text-decoration:none
+}
+.bbutton:hover{
+  background-color:#1e1e1e
+}
+.bbutton>span{
+  font-size:84%
+}
+.bbutton.b-close,.bbutton.bClose{
+  border-radius:7px 7px 7px 7px;
+  box-shadow:none;
+  font:bold 131% sans-serif;
+  padding:0 6px 2px;
+  position:absolute;
+  right:-7px;top:-7px
+}
+.popup{
+  background-color:#fff;
+  border-radius:5px 5px 5px 5px;
+ /* box-shadow:0 0 10px 5px #999; */ 
+  color:#111;
+  display:none;
+  min-width:350px;
+  padding:15px
+  position: fixed;
+  top: 100px !important;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+  

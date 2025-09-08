@@ -1,0 +1,159 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+  
+       <!-- Section 1: Header -->
+      <section>
+        <div class="row" style="margin-top:0px; margin-bottom: 40px;">
+          <h3>Sampling strategy</h3>
+        </div>
+      </section>
+      <!--!Section 1: Header -->
+
+      <!--Section 2: Sampling strategy -->     
+      <section>
+        <div class="row" style = "margin-top: -20px;">
+          <div class="col-md-10 mb-1"> 
+            <form name = "strategyform"> 
+              <div class="formcontainer">
+                 <div class="row" style="margin-top: 10px; padding-left:10px; border: 2px dashed rgb(200,200,200);">
+                    <h4><i class="fa fa-bullseye icostyle_menu"></i> Target population</h4>
+                    <br/>
+                    <div class = "container5" >
+                      <div class="col-md-6 mb-1" >   
+                        <div style = "height: 250px; width: 500px; margin-bottom: 0px; z-index: -1;">
+                          <div id = "target" style = "position: absolute; z-index: 1;" ><img src = "img/target.png"/></div>
+                          <div id = "target_1" style = "position: absolute; display: block; z-index: 2;" ><img src = "img/target_1.png"/></div>
+                          <div id = "target_2" style = "position: absolute; display: block; z-index: 3;" ><img src = "img/target_2.png"/></div>
+                          <div id = "target_3" style = "position: absolute; display: block; z-index: 4;" ><img src = "img/target_3.png"/></div>
+                          <div id = "target_4" style = "position: absolute; display: block; z-index: 5;" ><img src = "img/target_4.png"/></div>
+                          <div id = "target_5" style = "position: absolute; display: block; z-index: 6;" ><img src = "img/target_5.png"/></div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-1">   
+                        <input type="checkbox" id="reg_1" class="form-check-input" onclick = "ADDtarget(1);" checked></input>
+                        <label class="form-check-label" for="reg_1"><h4>Beria</h4></label>
+                        <br/>
+                        <input type="checkbox" id="reg_2" class="form-check-input" onclick = "ADDtarget(2);" checked></input>
+                        <label class="form-check-label" for="reg_2"><h4>Bridford</h4></label>
+                        <br/>
+                        <input type="checkbox" id="reg_3" class="form-check-input" onclick = "ADDtarget(3);" checked></input>
+                        <label class="form-check-label" for="reg_3"><h4>Central Region</h4></label>
+                        <br/>
+                        <input type="checkbox" id="reg_4" class="form-check-input" onclick = "ADDtarget(4);" checked></input>
+                        <label class="form-check-label"  for="reg_4"><h4>Northern Peninsula</h4></label>
+                        <br/>
+                        <input type="checkbox" id="reg_5" class="form-check-input" onclick = "ADDtarget(5);" checked></input>
+                        <label class="form-check-label" for="reg_5"><h4>South East</h4></label>
+                        <br/>
+                      </div>
+                    </div>   
+
+                    <h4 style = "margin-top: 30px; margin-left: 18px;">Age: &nbsp;
+                      <span class= "defcol">
+                        <label>Minimum<input type="text" class="form-control" id = "agemin" name="agemin" size = "5" value="15"></label>
+                        <label>Maximum<input type="text" class="form-control" id = "agemax" name="agemax" size = "5" value="120"></label>
+                      </span>
+                    </h4> 
+                    <h4 style = "margin-top: 10px; margin-left: 18px; margin-bottom: 10px;">Sex: &nbsp;
+                      <span class= "defcol">
+                        <label><input type="radio" class="form-check-input" name="sex" value = "Female" checked="checked"> Females</label>
+                        <label><input type="radio" class="form-check-input" name="sex" value = "Male"> Males</label>
+                        <label><input type="radio" class="form-check-input" id="sex" name="sex" value = "Both" checked="checked"> Females & Males</label>
+                      </span>
+                    </h4> 
+                  </div> 
+
+                  <div class="row" style="margin-top: 20px; padding-left:10px; border: 2px dashed rgb(200,200,200);">
+                    <h4><i class="fa fa-align-justify icostyle_menu"></i> Sampling stages</h4>
+                    <div style="width: 100%; padding-left:10px; font-weight: 800; margin-bottom: 10px; margin-left: 10px; margin-top: 10px;">
+                      <h4>Stratum:&nbsp; 
+                        <span class= "defcol">
+                          <label><input type="radio" class="form-check-input" id="stratification" name="stratification" value = "NONE" checked="checked"> None</label>
+                          <label><input type="radio" class="form-check-input" name="stratification" value = "REGION"> Region</label>
+                          <label><input type="radio" class="form-check-input" name="stratification" value = "TOWN"> Town</label>
+                          <label><input type="radio" class="form-check-input" name="stratification" value = "SUBURB"> Suburb</label> 
+                        </span>
+                      </h4>     
+                      <h4>Clusters:&nbsp; 
+                        <span class= "defcol">
+                          <label><input type="radio" class="form-check-input"  id="clustertype" name="clustertype" value = "NONE" checked="checked"> None</label>
+                          <label><input type="radio" class="form-check-input" name="clustertype" value = "ONE"> One level</label>
+                          <label><input type="radio" class="form-check-input" name="clustertype" value = "TWO"> Two levels</label>
+                        </span>
+                     </h4> 
+                      <div id = "zerolevels" style = "margin-left: 0px; margin-top: -5px; display: block;">
+                       <h4>Individual level:&nbsp; 
+                        <span style ="margin-left: 30px; font-weight: bold;">Individuals per stratum:&nbsp; </span><span class= "defcol"><label><input type="text" class="form-control" id="iss_0" name="iss_0" size = "5"  value = 100></label></span>
+                       </h4>
+                      </div>
+                       
+                      <div id = "onelevel" style = "margin-left: 20px; margin-top: -5px;display: none;">
+                       <h4>Cluster variable:&nbsp; 
+                        <span class= "defcol">
+                          <label><input type="radio" class="form-check-input" id="clust1_1" name="clust1_1" value = "TOWN" checked="checked"> Town</label>
+                          <label><input type="radio" class="form-check-input" name="clust1_1" value = "SUBURB"> Suburb</label> 
+                          <label><input type="radio" class="form-check-input" name="clust1_1" value = "HID"> Household</label> 
+                        </span>
+                        <span style ="margin-left: 30px; font-weight: bold;">Clusters per stratum:&nbsp;</span><span class= "defcol"><label><input type="text" class="form-control" id="nclust1_1" name="nclust1_1" size = "5" value = 2></label></span>
+                        <span style ="margin-left: 20px; font-weight: bold;">
+                          <label><input type="checkbox" class="form-check-input" id="pps1_1" name="pps1_1" value = "FALSE" checked="checked"> PPS</label>
+                         </span>
+                       </h4>  
+                       <h4 style = "margin-top: -10px;">Individual level:&nbsp; 
+                        <span style ="margin-left: 10px; font-weight: bold;">Individuals per cluster:&nbsp;</span><span class= "defcol"><label><input type="text" class="form-control" id="iss_1" name="iss_1" size = "5"  value = 20></label></span>
+                       </h4>
+                      </div>
+                      
+                      <div id = "twolevels" style = "margin-left: 20px; margin-top: -5px; display: none;">
+                        <h4>Level 1 cluster:&nbsp; 
+                          <span class= "defcol">
+                            <label><input type="radio" class="form-check-input" id = "clust1_2" name="clust1_2" value = "TOWN" checked="checked"> Town</label>
+                            <label><input type="radio" class="form-check-input" name="clust1_2" value = "SUBURB"> Suburb</label> 
+                            <label><input type="radio" class="form-check-input" name="clust1_2" value = "HID"> Household</label> 
+                          </span>
+                          <span style ="margin-left: 30px; font-weight: bold;">Clusters per stratum:&nbsp;</span><span class= "defcol"><label><input type="text" class="form-control" id="nclust1_2" name="nclust1_2" size = "5" value = 2></label></span>
+                         <span style ="margin-left: 20px; font-weight: bold;">
+                          <label><input type="checkbox" class="form-check-input" id="pps1_2" name="pps1_2" value = "FALSE" checked="checked"> PPS</label>
+                         </span>
+                        </h4>                           
+                        <h4 style = "margin-top: -5px;">Level 2 cluster:&nbsp; 
+                          <span class= "defcol">
+                            <label><input type="radio" class="form-check-input" name="clust2_2" value = "TOWN"> Town</label>
+                            <label><input type="radio" class="form-check-input" name="clust2_2" value = "SUBURB"> Suburb</label> 
+                            <label><input type="radio" class="form-check-input" id="clust2_2" name="clust2_2" value = "HID" checked="checked"> Household</label> 
+                          </span>
+                          <span style ="margin-left: 30px; font-weight: bold;">Clusters per level 1 cluster:&nbsp;</span><span class= "defcol"><label><input type="text" class="form-control" id="nclust2_2" name="nclust2_2" size = "4" value = 20></label></span>
+                          <span style ="margin-left: 20px; font-weight: bold;">
+                            <label><input type="checkbox" class="form-check-input" id="pps2_2" name="pps2_2" value = "FALSE" checked="checked"> PPS</label>
+                         </span>
+                        </h4>  
+                        <h4 style = "margin-top: -10px;">Individual level:&nbsp; 
+                          <span style ="margin-left: 30px; font-weight: bold;">Individuals per level 2 cluster:&nbsp;</span><span class= "defcol"><label><input type="text" class="form-control" id="iss_2" name="iss_2" size = "4"  value = 1></label></span>
+                        </h4>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-1">
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Strategy</h4>
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="resetstrategy" onclick="resetStrategy();" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg"  style = "position:relative; width: 160px; border-color: #000000;">RESET</button>
+           </div>
+        </div>
+    </div>          
+      </section>
+      <!--!Section 2: Sampling strategy -->  
+      
+      <!--Section 3: Info  -->
+      <section><div id="help_strategy"></div></section> 
+      <!--!Section 3: Info   -->
+
+  </div>
+</main>
+<!-- !Main layout-->

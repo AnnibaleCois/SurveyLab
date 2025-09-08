@@ -1,0 +1,61 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:0px;">
+         <h3>Share results</h3>   
+          </div>
+      </section>
+      <!--!Section 1: Header -->  
+      
+      <!--Section 2: Sharing -->   
+      <section style="margin-top: 40px; margin-left: -20px;">
+        <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px; height: 210px;">
+              <h4><i class="fa fa-share icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Estimates</h4>
+              <form name = "sharedform"> 
+                <div class="formcontainer">
+                  <span class= "defcol">
+                    <label style = "margin-left: 10px;">Estimate<input type="text" class="form-control" id="estimate_share" name="estimate_share" value="0" style = "width: 200px;"></select></label>
+                    <label style = "margin-left: 10px;">95% CI, lower bound<input type="text" class="form-control" id="lb_share" name="lb_share" value="0" style = "width: 200px;"></select></label>
+                    <label style = "margin-left: 10px;">95% CI, upper bound<input type="text" class="form-control" id="ub_share" name="ub_share" value="0" style = "width: 200px;"></select></label>
+                    <label style = "margin-left: 10px;">Notes<input type="text" class="form-control" id="notes_share" name="notes_share" value="" style = "width: 900px;"></select></label>
+                    </br/>
+                  </span>
+              </div>
+            </form>
+            </div> 
+          </div>
+          <div class="col-md-2 mb-1"> 
+            <button id ="estimates_share" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="shareEstimates(sharedform)">SHARE</button>
+          </div>
+        </div>  
+        
+      <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px; height: 200px;">
+              <h4><i class="fa fa-share icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Survey dataset</h4>
+              <div style = "font-weight: 800; margin-left: 10px;">Dataset: <span class = "defcol" id="dataset_share">None available</span></div>
+              <div style = "font-weight: 800; margin-left: 10px;">Number of records: <span class = "defcol" id="size_share">---</span></div>  
+              <div style = "font-weight: 800; margin-left: 10px;">Survey date and time: <span class = "defcol" id="time_share">---</span></div>  
+            </div> 
+          </div>
+          <div class="col-md-2 mb-1"> 
+            <button id ="result_share" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="shareResults()" disabled >SHARE</button>
+          </div>
+        </div>  
+      </section>  
+      <!-- !Section 2: Sharing -->     
+      
+      <!--Section 3: Info  -->
+      <section><div id="help_upload"></div></section> 
+      <!--!Section 3: Info   -->
+      
+    </div>
+  </div>
+</main>
+<!-- !Main layout-->

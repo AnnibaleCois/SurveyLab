@@ -1,0 +1,58 @@
+<!--Main layout-->
+<main class="mt-5">
+  <div class="container" style = "top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+    
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:35px;">
+        <h3>Data collection tool</h3>
+        <br/>
+        <div class="col-md-1 mb-1" > 
+          <img src="img/tool.png" style = "height: 110px; margin-left: -20px;"/>
+        </div>
+         <div class="col-md-2 mb-2"> 
+          <h4 class = "defcol">Tool</h4>
+          <div style = "font-weight: 800;">Items: <span class = "defcol" id="qitems_design">0</span></div>
+          <div style = "font-weight: 800;">Measurements: <span class = "defcol" id="mitems_design">0</span></div>
+          <div style = "font-weight: 800;">Time: <span class = "defcol" id="time_design">0</span></div>
+         </div>
+      </div>
+      </section>
+      <!-- !Section 1: Header -->  
+  
+      <!--Section 2: Tools-->
+      <section>
+        <div class="row" style = "margin-top: 20px;">  
+        <div class="col-md-3 gx-5 mb-1" style = "margin: 0;">
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Current tool</h4>
+            <ul id = "tool" class = "connectedSortable" style = "width: 100%; height: 420px; overflow-y: scroll; border: 2px dashed rgb(200,200,200); overflow:auto;"></ul>
+        </div>
+  
+        <div class="col-md-3 gx-5 mb-1" >
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Available questions</h4>         
+            <ul id ="quest" class="connectedSortable" style = "width: 100%;  height: 420px; overflow-y: scroll; border: 2px dashed rgb(200,200,200); overflow:auto;"></ul>
+        </div>
+        
+        <div class="col-md-3 gx-5 mb-1" >
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Available Measurements</h4>      
+            <ul id = "meas" class="connectedSortable" style = "width: 100%; height: 420px; overflow-y: scroll; border: 2px dashed rgb(200,200,200); overflow:auto;"></ul>
+        </div> 
+        
+        <div class="col-md-3 mb-1" style = "position: relative; left: 20px;"> 
+          <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Design</h4>
+         <button type="button" id="save" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "width: 160px; border-color: #000000; color: #FFFFFF" onclick="resetTool();">
+           RESET</button>
+         </div>
+      </section>
+      <!-- !Section 2: Tools-->
+      
+      <!--Section 3: Info-->
+      <section><div id="help_design"></div></section> 
+      <!--!Section 3: Info-->
+    
+    </div>
+  </div>
+</main>
+<!--Main layout-->

@@ -1,0 +1,37 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:0px;">
+         <h3>Logs</h3>   
+          </div>
+      </section>
+      <!--!Section 1: Header -->  
+      
+      <!--Section 2: Visualise -->   
+      <section style="margin-top: 30px; margin-left: -20px;">
+        <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:20px;">
+              <h4><i class="fa fa-code icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Server Logs</h4>
+              <textarea id ="serverlogs" rows="20" cols="110"></textarea>
+            </div> 
+          </div>
+          <div class="col-md-2 mb-1"> 
+              <button id ="reset_logs" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="resetLogs()">RESET</button>
+           </div>
+        </div>  
+      </section>  
+      <!-- !Section 2: Visualise -->     
+      
+      <!--Section 3: Info  -->
+      <section><div id="help_logs"></div></section> 
+      <!--!Section 3: Info   -->
+      
+    </div>
+  </div>
+</main>
+<!-- !Main layout-->

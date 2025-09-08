@@ -1,0 +1,266 @@
+<!-- Main layout -->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper"> 
+      <div class="container__watermark"></div>
+  
+      <!-- Section 1: Header -->
+      <section style = "margin-top: 0px;">
+        
+        <div class = "row" id = "ttitle" style = "margin-bottom: 0px; font-weight: bold;">
+          <h3 id = "ttowntitle">The SurveyLab world</h3>
+          <h4 id = "ttownstats"><span class = "defcol" id = "ttownregion">&nbsp;</span><span class = "defcol" id = "ttownpop">&nbsp;</span></h4>
+        </div>  
+        
+        <div class = "row" id = "header_images_sample" style = "padding: 10px; margin-bottom: 10px; display: block;">  
+          <div class="col-md-7 mb-1" >
+            <img src = "img/notvisited.png"/><span style = "padding: 10px;">Non visited</span>
+            <img src = "img/visited.png"/><span style = "padding: 10px;">Visited</span>
+            <img src = "img/selected.png"/><span style = "padding: 10px;">Selected (<span class= "defcol" id = "hssize_town">0</span> households, <span class= "defcol" id = "issize_town">0</span> individuals)</span>
+          </div>
+          <div class="col-md-2 mb-1" >
+            <button type="button" id = "cleartown_sample" class="btn btn-outline-primary btn-lg" onclick="newHSample(0);" style="width: 160px; padding-top: 5px; border-color: #000000; background: #ff8c00;">NEW SAMPLE</button>
+          </div>
+        </div>
+
+        <div class="row" id = "header_images_overview" style="padding: 10px; margin-bottom: 10px; margin-left: 10px; display: none;">
+          <div class="col-md-1 mb-1"> 
+            <img src="img/people.png" style = "height: 100px; margin-left: -20px;" />
+          </div>
+          <div class="col-md-2 mb-1" > 
+            <h4 class = "defcol">Current sample</h4>
+            <div style = "font-weight: 800;">Towns: <span class = "defcol" id="tssize_sample">0</span></div>
+            <div style = "font-weight: 800;">Households: <span class = "defcol" id="hssize_sample">0</span></div>
+            <div style = "font-weight: 800;">Individuals: : <span class = "defcol" id="issize_sample">0</span></div>
+          </div>
+          <div class="col-md-3 mb-1" > 
+            <h4 class = "defcol">Strategy</h4>
+            <div style = "font-weight: 800;">Type: <span class = "defcol" id="type_sample">-</span></div>
+            <div style = "font-weight: 800;">Strata: <span class = "defcol" id="strata_sample">-</span></div>
+            <div style = "font-weight: 800;">Clusters: <span class = "defcol" id="clusters_sample">-</span></div>
+          </div>
+          <div class="col-md-2 mb-1"> 
+            <h4 class = "defcol">Sample</h4>
+            <button type="button" id = "clearall_sample" class="btn btn-outline-primary btn-lg" onclick="newHSample(1);" style="width: 140px; padding-top: 5px; border-color: #000000; background: #ff8c00;">NEW</button>
+          </div> 
+          <div class="col-md-2 mb-1" > 
+            <button type="button" id = "random_sample" class="btn btn-outline-primary btn-lg" onclick="drawRSample(strategyform);" style="width: 140px; padding-top: 5px; border-color: #000000; background: #ff8c00; margin-top: 50px; margin-left: -20px;">RANDOM</button>
+          </div> 
+        </div>
+      </section>
+      <!-- !Section 1: Header -->
+      
+      <!-- Section 2: Maps -->
+      <section>
+        <div class="row">
+          <!-- Map area -->
+          <div class="col-md-10 mb-1"> 
+            <!-- Zoom area -->
+            <div class="parent" id = "parent_sample" style="overflow: hidden; user-select: none; touch-action: none; background-color: #FFA478; height:700px; width: 945px;">
+              <div class="panzoom" id = "panzoom-element_sample">
+              <!-- Map --><img id = "ms" src="./maps/sample.svg" onload = "SVGInject(this, options = {makeIdsUnique: false})" style = "opacity: 1;"/><!-- /Map -->  
+              </div>
+            </div>
+            <!-- /Zoom area -->
+            <!-- Grid --><img id = "msgrid" src="img/grid.png" style = "position: absolute; top: 0px; left:-22px; z-index: 50; visibility: visible; pointer-events: none;"/> <!-- /Grid -->
+            <!-- Note --><img id = "note" src="img/danger.png" style = "position: absolute; top: 20px; right: 50px; z-index: 60; visibility: hidden; pointer-events: none;"/><!-- /Note-->
+            <!-- Sampl9mng ratios --><h5 id = "sratios_sample" style = "position: absolute; top: 0px; left: 50px; z-index: 60; font-weight: 800; pointer-events: none;"></h5><!-- /Target pop size-->
+            <!-- Spinner --><div id = "samplespinner" style = "position: absolute; top: 250px; left:400px; z-index: 70; width: 200px; height: 200px;"></div><!-- /Spinner -->
+ 
+            <!-- Household members -->
+            <div id = "selHous" style = "position: absolute; top: 20px; left:520px; z-index: 90; visibility: hidden; background-color: #FFFFFF99; width: 410px;">
+              <div id = "selInd" >
+                <div class="row" style = "margin: 10px;">
+                  <h4 style = "margin-left: 20px;">Household <span id = hsampled></span></h4>
+                  <div class="col-md-12 mb-1" style = "margin-top: 10px; margin-bottom: 20px;">
+                    <div id="sample"></div>
+                    <br/>
+                    <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick="selectHH(int_currentHousehold);" style="width: 340px; padding-top: 3px; background: #85A478;">SELECT</button>
+                    <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick="deselectHH(int_currentHousehold);" style="width: 340px; padding-top: 3px; background: #85A478;">CANCEL</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Household members -->
+          </div>
+          <!-- /Map area -->
+          <!-- Map controls -->
+          <div class="col-md-1" >
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Map</h4>
+            <div class = "dropdown" style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="overview_sample" onclick = 'replaceSvg(container = "panzoom-element_sample", town = 0)' class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg dropdown-toggle" data-toggle="dropdown" style = "position:relative; width: 160px; border-color: #000000;">OVERVIEW</button>
+            </div>
+            <div class = "dropdown" style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="town_map1_sample" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg dropdown-toggle" data-toggle="dropdown" style = "position:relative; width: 160px; border-color: #000000;">TOWN</button>
+                <div class="dropdown-menu" style = "margin-left: 10px; max-height: 600px; overflow-y: scroll; background-color: #DDDDDD;">
+                  <div id = "DROPDOWN_SAMPLE" style = "margin-left: 10px; margin: 5px;"></div>
+                </div>
+            </div>
+            <h4 class = "defcol" style = "margin-top: 10px; margin-bottom: 10px;">Zoom</h4>
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="zoom-in_sample" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 160px; border-color: #000000;">INCREASE</button>
+              <button type="button" id="zoom-out_sample" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 160px; border-color: #000000;">DECREASE</button>
+              <button type="button" id="reset_sample" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick = "" style = "position:relative; width: 160px; border-color: #000000;">RESET</button>
+            </div>
+            <div id = "checkbox_sample_1">
+              <h4 class = "defcol" style = "margin-top: 10px; margin-bottom: 10px;">Show</h4>
+              <div style = "box-shadow:none; position: relative; left: 15px; width: 250px;">
+                <div class = "form-check"><input id="bsub_sample" type="checkbox" class="form-check-input" onclick="showhideLabels_sample('sub')" ><label class="form-check-label" for="bsub_sample">&nbsp;Suburbs</label></div>
+                <div class = "form-check"><input id="bbui_sample" type="checkbox" class="form-check-input" onclick="showhideLabels_sample('bui')" checked><label class="form-check-label" for="bbui_sample">&nbsp;Public Buildings</label></div>
+                <div class = "form-check"><input id="bnum_sample" type="checkbox" class="form-check-input" onclick="showhideLabels_sample('num')"><label class="form-check-label" for="bnum_sample">&nbsp;Household Number</label></div>
+                <div class = "form-check"><input id="grid_sample" type="checkbox" class="form-check-input" onclick="showhideLabels_sample('grid')" checked><label class="form-check-label" for="grid_sample">&nbsp;Grid</label></div>
+              </div>
+            </div> 
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button id = "bres_sample" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick="resetLabels_sample('res')" style="width: 160px; padding-top: 3px; border-color: #000000;">RESET</button>
+            </div>
+          </div> 
+          <!-- /Map Controls -->
+        </div>
+      </section>
+      <!-- !Section 2: Maps -->
+      
+      <!-- Section 3: town selectors -->
+      <section style = "position: relative; top: -910px; margin-top: 25px; margin-left: 25px; margin-right: 20px; width: 945px;">
+        <div id = "TLIST" class="btn-toolbar" role="toolbar"></div>
+      </section>
+      <!-- !Section 3: town selectors -->
+      
+      <!-- Section 4: Info  -->
+      <section style = "position: relative; top: 0px;"><div id="help_sample"></div></section> 
+      <!-- !Section 4: Info   -->
+      
+    </div>
+  </div>
+</main>
+<!-- !Main layout -->
+
+<!-- Section 5: Popups -->
+<section style="display: none;">
+  <div class="popup" id="moffice">
+  <span class="bbutton b-close"><span>X</span></span>
+  <div class="content">
+    <div>
+      <div style = "width: 70px; float: left; top: 20px;">
+        <img src = "img/stats.png" height=55 />
+      </div>  
+      <div style = "width: 70%; float: left; top: 20px; left: 25%;">  
+        <h4>Town of <span id = "mtown">Durtis</span></h4>
+        <h6>Municipal statistics</h6>
+      </div>
+    </div>
+    <div style = "padding: 10px; margin-top: 80px;">
+      <ul class = "list1">
+        <li>Altitude: <span class = "stat" id = "malt"></span> [metres above sea level]</li>
+        <li>Population: <span class = "stat" id = "mpop"></span> </li>
+        <li>Households: <span class = "stat" id = "mhh"></span> </li>
+        <li>Region capital: <span class = "stat" id = "mcap"></span> </li>
+        <li>Environmental Offices: <span class = "stat" id = "meoff"></span> </li>
+        <li>Clinics: <span class = "stat" id = "mclin"></span> </li>
+        <li>Hospitals: <span class = "stat" id = "mhosp"></span> </li>          
+      </ul>
+      <ul class = "list2">
+        <li>Average Wealth: <span class = "stat" id = "mwea"></span> [WU]</li>
+        <li>Gini Index: <span class = "stat" id = "mgini"></span> </li>
+      </ul>  
+      <div id = "msub" class = "list3"></div>
+      <ul class = "list4">
+        <li>Lead mines: <span class = "stat" id = "mlead"></span> </li>
+        <li>Gold mines: <span class = "stat" id = "mgold"></span> </li>
+        <li>Power stations: <span class = "stat" id = "mpow"></span> </li>
+      </ul>  
+    </div>
+  </div>
+</div>
+  <div class="popup" id="eoffice">
+  <span class="bbutton b-close"><span>X</span></span>
+  <div class="content">
+    <div>
+      <div style = "width: 70px; float: left; top: 20px;">
+        <img src = "img/stats.png" height=55 />
+      </div>  
+      <div style = "width: 70%; float: left; top: 20px; left: 25%;">  
+        <h4>Region of <span id = "ereg"></span></h4>
+        <h6>Environmental statistics</h6>
+      </div>
+    </div>
+    <div style = "padding: 10px; margin-top: 80px;">
+      <ul class = "list1">
+        <li>Altitude: <span class = "stat" id = "ealt"></span> [metres above sea leve]</li>
+        <li>Average temperature: <span class = "stat" id = "etavg"></span> [&#8451;]</li>
+        <li>Maximum temperature: <span class = "stat" id = "etmax"></span> [&#8451;]</li>
+        <li>Minimum temperature: <span class = "stat" id = "etmin"></span> [&#8451;]</li>
+        <li>Average rainfall: <span class = "stat" id = "eravg"></span> [mm]</li>
+        <li>PM 25: <span class = "stat" id = "ep25"></span> [ppm]</li>
+      </ul>
+      <div id = "etowns" class = "list3"></div>
+    </div>
+  </div>
+</div>
+  <div class="popup" id="hospital">
+  <span class="bbutton b-close"><span>X</span></span>
+  <div class="content">
+    <div>
+      <div style = "width: 70px; float: left; top: 20px;">
+        <img src = "img/stats.png" height=55 />
+      </div>  
+      <div style = "width: 70%; float: left; top: 20px; left: 25%;">  
+        <h4><span id = "hname"></span> Hospital</h4>
+        <h6>Facility statistics</h6>
+      </div>
+    </div>
+    <div style = "padding: 10px; margin-top: 80px;">
+      <ul class = "list1">
+        <li>Beds: <span class = "stat" id = "hbeds"></span></li>
+        <li>Outpatients headcount: <span class = "stat" id = "hhead"></span> [per day]</li>
+        <li>Doctors: <span class = "stat" id = "hdoc"></span></li>
+        <li>Nurses: <span class = "stat" id = "hnur"></span></li>
+      </ul>
+      <ul class = "list2">
+        <li>Antenatal Care: <span class = "stat" id = "hser1"></span></li>
+        <li>Child Health: <span class = "stat" id = "hser2"></span></li>
+        <li>HIV/AIDS/TB/STI: <span class = "stat" id = "hser3"></span></li>
+        <li>Chronic Diseases: <span class = "stat" id = "hser4"></span></li>
+        <li>Trauma and Emergency: <span class = "stat" id = "hser5"></span></li>
+        <li>Oral health: <span class = "stat" id = "hser6"></span></li>
+        <li>Eye Care: <span class = "stat" id = "hser7"></span></li>
+        <li>Surgery: <span class = "stat" id = "hser8"></span></li>
+        <li>Mental Health: <span class = "stat" id = "hser9"></span></li>
+      </ul>  
+    </div>
+  </div>
+</div> 
+  <div class="popup" id="clinic">
+  <span class="bbutton b-close"><span>X</span></span>
+  <div class="content">
+    <div>
+      <div style = "width: 70px; float: left; top: 20px;">
+        <img src = "img/stats.png" height=55 />
+      </div>  
+      <div style = "width: 70%; float: left; top: 20px; left: 25%;">  
+        <h4><span id = "cname"></span> Clinic</h4>
+        <h6>Facility statistics</h6>
+      </div>
+    </div>
+    <div style = "padding: 10px; margin-top: 80px;">
+      <ul class = "list1">
+        <li>Outpatients headcount: <span class = "stat" id = "chead"></span> [per day]</li>
+        <li>Doctors: <span class = "stat" id = "cdoc"></span></li>
+        <li>Nurses: <span class = "stat" id = "cnur"></span></li>
+      </ul>
+      <ul class = "list2">
+        <li>Antenatal Care: <span class = "stat" id = "cser1"></span></li>
+        <li>Child Health: <span class = "stat" id = "cser2"></span></li>
+        <li>HIV/AIDS/TB/STI: <span class = "stat" id = "cser3"></span></li>
+        <li>Chronic Diseases: <span class = "stat" id = "cser4"></span></li>
+        <li>Trauma and Emergency: <span class = "stat" id = "cser5"></span></li>
+        <li>Oral health: <span class = "stat" id = "cser6"></span></li>
+        <li>Eye Care: <span class = "stat" id = "cser7"></span></li>
+        <li>Surgery: <span class = "stat" id = "cser8"></span></li>
+        <li>Mental Health: <span class = "stat" id = "cser9"></span></li>
+      </ul>  
+    </div>
+  </div>
+</div> 
+</section>
+<!-- !Section 5: Popups -->

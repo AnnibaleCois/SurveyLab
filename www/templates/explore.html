@@ -1,0 +1,114 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper"> 
+      <div class="container__watermark"></div>
+    
+      <!-- Section 1: Header-->
+      <section style = "margin-top: 0px; margin-bottom: 70px;">
+        <div class = "row" id = "etitle" style = "margin-bottom: -60px; font-weight: bold;">
+          <h3 id = "etowntitle">The SurveyLab world</h3>
+          <h4 id = "etownstats"><span class = "defcol" id = "etownregion">&nbsp;</span><span class = "defcol" id = "etownpop">&nbsp;</span></h4>
+        </div>
+      </section>
+      <!-- !Section1 : Header-->
+      
+      <!-- Section 2: Maps -->
+      <section>
+        <div class="row">
+          <!-- Map area -->
+          <div class="col-md-10 mb-1">
+            <!-- Zoom area -->
+            <div class="parent" id = "parent_world" style="overflow: hidden; user-select: none; touch-action: none; background-color: rgb(70,110,171); height:700px;  width:945px;">
+              <div class="panzoom" id="panzoom-element_world">
+                <!-- Map --><img id = "mw" src="maps/world.svg" onload = "SVGInject(this, options = {makeIdsUnique: false})" style = "opacity: 1;"/><!-- /Map -->
+              </div>
+            </div>
+            <!-- /Zoom area -->
+          </div>
+          <!-- /Map area -->
+          <!-- Map controls -->
+          <div class="col-md-1" >
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Map</h4>
+            <div class = "dropdown" style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+               <button type="button" id="world_map_explore" onclick = 'replaceSvg(container = "panzoom-element_world", town = 0)' class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 160px; border-color: #000000;">WORLD</button>
+               <button type="button" id="town_map_explore" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg dropdown-toggle" data-toggle="dropdown" style = "position:relative; width: 160px; border-color: #000000;">TOWN
+                </button>
+                <div class="dropdown-menu" style = "margin-left: 10px; max-height: 600px; overflow-y: scroll; background-color: #DDDDDD;">
+                  <div id = "DROPDOWN_EXPLORE" style = "margin-left: 10px; margin: 5px;">
+                  </div>
+                </div>
+            </div>
+            <h4 class = "defcol" style = "margin-top: 0px; margin-bottom: 10px;">Zoom</h4>
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="zoom-in_world" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 160px; border-color: #000000;">INCREASE</button>
+              <button type="button" id="zoom-out_world" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 160px; border-color: #000000;">DECREASE</button>
+              <button type="button" id="reset_world" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick = "" style = "position:relative; width: 160px; border-color: #000000;">RESET</button>
+            </div>
+            <h4 class = "defcol" style = "margin-top: 0px; margin-bottom: 10px;">Show</h4>
+            <div id = "bworld" style = "display: block;">
+              <div style = "box-shadow:none; position: relative; left: 15px; width: 250px;">
+                <div class = "form-check"><input id="breg" type="checkbox" class="form-check-input" onclick="showhide('reg')" checked><label class="form-check-label" for="breg">&nbsp;Regions</label></div>
+                <div class = "form-check"><input id="btow" type="checkbox" class="form-check-input" onclick="showhide('tow')" checked><label class="form-check-label" for="btow">&nbsp;Towns</label></div>
+                <div class = "form-check"><input id="bele" type="checkbox" class="form-check-input" onclick="showhide('ele')"><label class="form-check-label" for="bele">&nbsp;Elevation</label></div>
+                <div class = "form-check"><input id="briv" type="checkbox" class="form-check-input" onclick="showhide('riv')"><label class="form-check-label" for="briv">&nbsp;Rivers</label></div>
+                <div class = "form-check"><input id="btem" type="checkbox" class="form-check-input" onclick="showhide('tem')"><label class="form-check-label" for="btem">&nbsp;Temperature</label></div>
+                <div class = "form-check"><input id="bhaz" type="checkbox" class="form-check-input" onclick="showhide('tem')"><label class="form-check-label" for="bhaz">&nbsp;Mines & powerstations</label></div>
+              </div>
+              <button id = "bres_world" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick="resetlayers('res')" style = "width: 160px; border-color: #000000; color: #FFFFFF">RESET</button>
+            </div>
+            <div id = "btown" style = "display: none;">
+              <div style = "box-shadow:none; position: relative; left: 15px; width: 250px;">
+                <div class = "form-check"><input id="bsub_explore" type="checkbox" class="form-check-input" onclick="showhideLabels_explore('sub')" checked><label class="form-check-label" for="bsub_explore">&nbsp;Suburbs</label></div>
+                <div class = "form-check"><input id="bbui_explore" type="checkbox" class="form-check-input" onclick="showhideLabels_explore('bui')" checked><label class="form-check-label" for="bbui_explore">&nbsp;Public Buildings</label></div>
+                <div class = "form-check"><input id="bnum_explore" type="checkbox" class="form-check-input" onclick="showhideLabels_explore('num')"><label class="form-check-label" for="bnum_explore">&nbsp;Household Number</label></div>
+              </div> 
+              <div style = "box-shadow:none; position: relative; left: 0px;">
+                <button id = "bres_explore" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" onclick="resetLabels_explore('res')" style = "width: 160px; color:#FFFFFF;">RESET</button>
+              </div>
+            </div>
+          </div>
+          <!-- /Map Controls -->
+        </div>
+      </section>  
+      <!-- !Section 2: Maps -->
+      
+      <!-- Section 3: Info -->
+      <section><div id="help_explore"></div></section> 
+      <!-- !Section 3: Info -->
+     </div> 
+    </div>
+</main>
+<!-- !Main layout-->
+
+<!-- Section 4: Popups -->
+<section style="display: none;">
+  <div class="popup" id="rpopup">
+    <span class="bbutton b-close"><span>X</span></span>
+    <div class="content">
+      <div>
+        <div style = "width: 20%; float: left;  top: 20px;">
+          <img src = "img/stats.png" height=55 />
+        </div>
+        <div style = "width: 70px; float: left; top: 20px; left: 25%;">
+          <h4><span id = "rname"></span></h4>
+          <h6>Statistics</h6>
+        </div>
+      </div>
+      <div style = "padding: 10px; margin-top: 80px;">
+        <!-- <div id = "regmap" style = "padding: 10px; "></div> -->
+        <ul class = "list1">
+          <li>Population: <span class = "stat" id = "rpop"></span> </li>
+          <li>Capital: <span class = "stat" id = "recap"></span> </li>
+          <li>Average Wealth: <span class = "stat" id = "rwea"></span> </li>
+          <li>Gini Index: <span class = "stat" id = "rgini"></span> </li>
+          <li>Environmental Offices: <span class = "stat" id = "renv"></span> </li>
+          <li>Clinics: <span class = "stat" id = "rclin"></span> </li>
+          <li>Hospitals: <span class = "stat" id = "rhos"></span> </li>
+        </ul>
+        <div id = "rtowns" class = "list3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- !Section 4: Popups -->

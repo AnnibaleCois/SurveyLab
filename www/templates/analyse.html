@@ -1,0 +1,138 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+  
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:0px; margin-bottom: 40px;">
+          <h3>Survey results</h3>
+          <br/>
+          <div class="col-md-1 mb-1"> 
+            <img src="img/people.png" style = "height: 100px; margin-left: -20px;" />
+          </div>
+          <div class="col-md-2 mb-1" > 
+            <h4 class = "defcol">Sample</h4>
+            <div style = "font-weight: 800;">Towns: <span class = "defcol" id="tssize_analyse">0</span></div>
+            <div style = "font-weight: 800;">Households: <span class = "defcol" id="hssize_analyse">0</span></div>
+            <div style = "font-weight: 800;">Individuals: : <span class = "defcol" id="issize_analyse">0</span></div>
+          </div>        
+          <div class="col-md-1 mb-1" > 
+            <img id = "toolicon" src="img/tool.png" style = "height: 100px; margin-left: -20px;"/>
+          </div>
+          <div class="col-md-2 mb-1" style = "margin-left:0px;"> 
+            <h4 class = "defcol">Tool</h4>
+            <div style = "font-weight: 800;">Items: <span class = "defcol" id="qitems_analyse">0</span></div>
+            <div style = "font-weight: 800;">Measurements: <span class = "defcol" id="mitems_analyse">0</span></div>
+            <div style = "font-weight: 800;">Time: <span class = "defcol" id="time_analyse">0</span></div>
+          </div>
+          <div class="col-md-1 mb-1"> 
+            <img src="img/budget.png" style = "height: 100px; margin-left: -20px;"/>
+          </div>
+          <div class="col-md-2 mb-1" > 
+            <h4 class = "defcol">Cost</h4>
+            <div style = "font-weight: 800;">Set up: <span class = "defcol" id="setupcost_analyse">0</span></div>
+            <div style = "font-weight: 800;">Collection: <span class = "defcol" id="collectcost_analyse">0</span></div>         
+            <div style = "font-weight: 800;">Total: <span class = "defcol" id="totcost_analyse">0</span></div>
+          </div>  
+          <div class="col-md-2 mb-1" > 
+            <h4 class = "defcol">Unit cost</h4>
+            <div style = "font-weight: 800;">Estimated: <span class = "defcol" id="unitcost_est_analyse">0</span></div>
+            <div style = "font-weight: 800;">Realised: <span class = "defcol" id="unitcost_rea_analyse">0</span></div>
+          </div>              
+        </div>
+      </section>
+      <!--!Section 1: Header -->  
+      
+      <!--Section 2: Realisation -->    
+      <section>
+        <div class="row" style = "margin-top: 40px;">
+          <div class="col-md-10 mb-1"> 
+            <div style = "margin-bottom: 10px; border: 2px dashed rgb(200,200,200); ">
+              <div style = "margin-right: 35px; height:30px;"> 
+                <h4 style = "margin-left: 10px;"><i class="fa fa-bullseye icostyle_menu" style="margin-bottom: 10px; margin-left: 10px;"></i> Response rates</h4>
+                <div style = "font-weight: 400; margin-left: 20px; fint-size: 120%;">
+                  Household: <span class = "defcol" id="anhrr">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Individual: <span class = "defcol" id="anirr">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Total: <span class = "defcol" id="antrr">0</span>
+                </div>
+              </div>
+              <div style = "margin-right: 35px; margin-top: 60px; height:150px; margin-bottom: 20px;">
+              <canvas id="rr" style = "margin-left: 20px;"></canvas>
+            </div>
+              <div style = "height:300px; margin-bottom: 50px; margin-right: 40px;">
+              <h4 style = "margin-left: 20px;"><i class="fa fa-bullseye icostyle_menu" style="margin-left: 10px;"></i> Response rates by region</h4>
+              <canvas id="regrr" style = "margin-left: 20px;  margin-top: 20px;"></canvas>
+            </div>
+              <div style = "height:310px; margin-bottom: 20px; margin-right: 20px;">
+              <h4 style = "margin-left: 30px;"><i class="fa fa-bullseye icostyle_menu" style="margin-left: 10px;"></i> Response rates by town</h4>
+              <div id="towrr" style = "margin-left: 30px; margin-top: 20px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>              
+      <!--!Section 2: Realisation -->    
+      
+      <!--Section 3: Comparisons -->
+      <section>
+        <div class="row" style = "margin-top: 20px;">
+          <div class="col-md-10 mb-1"> 
+            <form name = "analysisform"> 
+              <div class="formcontainer">
+                <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
+                  <h4 style = "position: relative; left: 10px;"><i class="fa fa-sliders icostyle_menu"></i> Parameters for comparisons</h4>
+                  <div style="width: 100%; padding-left:0px; font-weight: 800; margin-bottom: 10px; margin-left: 18px;">
+                    <span class= "defcol">
+                      <label style = "margin-left: 10px;">Outcome<select id = "anvar" class="form-control" name="anvar" style = "width: 880px;"></select></label>
+                      <br/>
+                      <label style = "margin-left: 10px;">Group<select id = "angroup" class="form-control" name="angroup" style = "width: 880px;"></select></label>
+                      <br/>
+                      <label style = "margin-left: 10px;">Target Population<select id = "antarget" class="form-control" name="antarget" style = "width: 880px;">
+                        <option value="surveylab">SurveyLab</option>
+                        <option value="regions">Region(s)</option>
+                        <option value="towns">Town(s)</option>
+                        <option value="suburbs">Suburbs(s)</option>
+                      </select></label>
+                      <br/>
+                     </span>
+                  </div>
+                </div>
+              </div>               
+            </form>
+          </div>
+        </div>                       
+                      
+        <div class="row" >
+          <div class="col-md-10 mb-1">
+            <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
+              <h4><i class="fa fa-sliders icostyle_menu"></i> Estimates</h4>
+                <h4 >Sample estimates</h4>
+                <div id ="ansamplestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
+                  <img src = "img/placeholder_2.png"></img>
+                </div>
+                <h4> Population true values</h4>
+                <div id ="anpopestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
+                  <img src = "img/placeholder_2.png">
+                  </img></div>
+            </div>
+            </div>
+          <div class="col-md-2">
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px; ">Comparison</h4>
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="calc_power" onclick="sampleAnalysis(analysisform); popAnalysis(analysisform);" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg"  style = "position:relative; width: 160px; border-color: #000000;">COMPARE</button>
+            </div>
+          </div>
+        </div>              
+          
+      </section>
+      <!--!Section 3: Comparisons-->
+      
+      <!--Section 4: Info  -->
+      <section><div id="help_analyse"></div></section>
+      <!--!Section 4: Info   -->
+  
+    </div>  
+  </div>
+</main>
+<!-- !Main layout-->

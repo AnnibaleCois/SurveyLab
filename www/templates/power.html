@@ -1,0 +1,101 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+  
+       <!-- Section 1: Header -->
+      <section>
+        <div class="row" style="margin-top:0px; margin-bottom: 40px;">
+          <h3>Power analysis</h3>
+          <br/>
+          <div class="col-md-1 mb-1"> 
+          <img src="img/people.png" style = "height: 100px; margin-left: -20px;" />
+          </div>
+          <div class="col-md-2 mb-1" > 
+            <h4 class = "defcol">Sample</h4>
+            <div style = "font-weight: 800;">Towns: <span class = "defcol" id="tssize_power">0</span></div>
+            <div style = "font-weight: 800;">Households: <span class = "defcol" id="hssize_power">0</span></div>
+            <div style = "font-weight: 800;">Individuals: : <span class = "defcol" id="issize_power">0</span></div>
+          </div>
+          <div class="col-md-3 mb-1" > 
+            <h4 class = "defcol">Strategy</h4>
+            <div style = "font-weight: 800;">Type: <span class = "defcol" id="type_power">-</span></div>
+            <div style = "font-weight: 800;">Strata: <span class = "defcol" id="strata_power">-</span></div>
+            <div style = "font-weight: 800;">Clusters: <span class = "defcol" id="clusters_power">-</span></div>
+          </div>
+        </div> 
+      </section>
+      <!--!Section 1: Header -->
+
+      <!--Section 2: Power analysis -->     
+      <section>
+        <div class="row" style = "margin-top: -20px;">
+          <div class="col-md-10 mb-1"> 
+            <form name = "powerform"> 
+              <div class="formcontainer">
+                <div class="row" style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
+                  <h4 style = "position: relative; left: 10px;"><i class="fa fa-sliders icostyle_menu"></i> Parameters for power calculation</h4>
+                  <div style="width: 100%; padding-left:0px; font-weight: 800; margin-bottom: 10px; margin-left: 18px;">
+                    <span class= "defcol">
+                      <label style = "margin-left: 10px;">Main outcome
+                      <select id = "eoutcome" class="form-control" name="eoutcome" style = "width: 900px;">
+                      </select>
+                      </label>
+                      </br/>
+                      <label style = "margin-left: 10px;">Expected proportion [%]<input type="text" class="form-control" id="eoutcome_eprop" name="eoutcome_eprop" value="50" style = "width: 200px;"></select></label>
+                      <label style = "margin-left: 10px;">Expected standard deviation<input type="text" class="form-control" id="eoutcome_esd" name="eoutcome_esd" value="1" style = "width: 200px;"></select></label>
+                      <label style = "margin-left: 10px;">Expected design effect<input type="text" class="form-control" id="eoutcome_edeff" name="eoutcome_edeff" value="1" style = "width: 200px;"></select></label>
+                      <label><input type="checkbox" class="form-check-input" id="eoutcome_auto" name="eoutcome_auto" value = "FALSE"> Auto</label>
+                      </br/>
+                      <label style = "margin-left: 10px;">Minimum response rate [%]<input type="text" class="form-control" name="eoutcome_min" value="60" style = "width: 200px;"></select></label>
+                      <!-- <label style = "margin-left: 10px;">Maximum response rate [%]<input type="text" class="form-control" name="eoutcome_max" value="100" style = "width: 200px;"></select></label> -->
+                    </span>
+                  </div>
+                </div>
+              </div>               
+            </form>
+          </div>
+        </div>    
+        <div class="row" >
+          <div class="col-md-10 mb-1" style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
+            <h4><i class="fa fa-sliders icostyle_menu"></i> Precision and cost<sup>*</sup></h4>
+            <div class="col-md-4 mb-1"> 
+              <div style = "font-weight: 800;">Outcome type: <span class = "defcol" id="outtype_power">---</span></div>
+              <div style = "font-weight: 800;">Population sd/proportion: <span class = "defcol" id="popvar_power">---</span></div>
+              <div style = "font-weight: 800;">Design effect: <span class = "defcol" id="deff_power">---</span></div>  
+              <br/>
+              <div style = "font-weight: 800;">Precision (total): <span class = "defcol" id="prec_power">---</span></div>
+              <div style = "font-weight: 800;">Precision (smallest stratum): <span class = "defcol" id="sprec_power">---</span></div>  
+              <br/>
+              <div style = "font-weight: 800;">Set up cost: <span class = "defcol" id="setupcost_power">---</span></div>
+              <div style = "font-weight: 800;">Collection cost: <span class = "defcol" id="collectcost_power">---</span></div>         
+              <div style = "font-weight: 800;">Total cost: <span class = "defcol" id="totcost_power">---</span></div>
+              <div style = "font-weight: 800;">Unit cost: <span class = "defcol" id="unitcost_power">---</span></div>
+              <br/><br/>
+              <span style = "font-size: 90%;">*&nbsp;at 100% response rate</span>
+              
+            </div>
+            <div class="col-md-8 mb-1" > 
+              <canvas id="powerrr" style="width:100%; background-image: url('img/placeholder_1.png');"></canvas>
+              <!-- Spinner --><div id = "powerspinner" style = "position: absolute; top: 50px; left:200px; z-index: 70; width: 200px; height: 200px;"></div><!-- /Spinner -->
+            </div>
+          </div>
+          <div class="col-md-2">
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Power</h4>
+            <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
+              <button type="button" id="calc_power" onclick="calcPower(powerform,strategyform);" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg"  style = "position:relative; width: 160px; border-color: #000000;">CALCULATE</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--!Section 2: Power analysis -->  
+      
+      <!--Section 3: Info  -->
+      <section><div id="help_power"></div></section> 
+      <!--!Section 3: Info   -->
+
+    </div>
+  </div>
+</main>
+<!-- !Main layout-->

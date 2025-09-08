@@ -1,0 +1,16 @@
+app.turso.tech
+Authertivcate with Github
+
+
+
+Database URL:
+libsql://userbase-annibalecois.aws-eu-west-1.turso.io
+
+Token (read/write):
+eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NTQ3NTk3MTIsImlkIjoiZTkwMzdlNWUtZDAwYi00OWMzLTgwZTUtOWZjNTdkMDE5MDBlIiwicmlkIjoiNjExYmEzN2YtMDE2Zi00M2YwLThlMWEtOTg0ZDZlNmY5Mjk1In0.DF4AY8FjXYD-due11yEpzQBwXl2WY9FWlOjP9v3f4DfCFkLC7uBAoMl-A9c3t5aGqxA8mAJsvXXD-UtQNyL8DA
+
+
+
+
+
+

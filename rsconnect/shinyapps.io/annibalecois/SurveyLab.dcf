@@ -1,0 +1,13 @@
+name: SurveyLab
+title: SurveyLab
+username: annibalecois
+account: annibalecois
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15375668
+bundleId: 10875946
+url: https://annibalecois.shinyapps.io/SurveyLab/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: memory|shared/Annibale_2025_09-07_14_40_19.RData|shared/Annibale_2025_09-07_14_40_22.RData|utilities/database/Database_utilities.R|utilities/database/Turso Access.txt

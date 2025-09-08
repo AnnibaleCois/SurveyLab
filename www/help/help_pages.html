@@ -1,0 +1,222 @@
+<!-- Explore -->
+<div id="explore" class="row" style="margin-top: 50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> The Survey<span class="lab">Lab</span> world</strong></h4>
+  <p class="card-text help" >
+    The <span style="font-style: italic;">SurveyLab</span> world consist of 110 <span class="defcol">Towns</span> distributed over 5
+    <span class="defcol">Regions</span>, for a total population of about 250000 people.
+    Each town has a <span class="defcol">Municipal Office</span> and one or more <span class="defcol">Health Facilities</span> (Clinics and Hospitals).
+    The main Town in each region, and a few other, have also an <span class="defcol">Environmental Health Office</span>. 
+    Town are subdivided in <span class="defcol">Suburbs</span>.
+  </p>
+  <p class="card-text help" >
+    Aggregated information about the Survey<span class="lab">Lab</span> world and its population can be accessed by 'visiting' Municipal Offices,
+    Health Facilities and Environmental Health Offices. They are indicated in the maps with these symbols:
+  </p>
+  <br />
+  <p class="indent" style="margin-top:15px;"><img src="img/pinm.svg" width=50 />Municipal Offices
+    <img src="img/pinc.svg" width=50 />Clinics
+    <img src="img/pino.svg" width=50 />Hospitals
+    <img src="img/pine.svg" width=50 />Environmental Health Offices
+  </p>
+  <br/>
+  <!--<div class="row" style="margin-top: 40px; text-align: justify;">-->
+    <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> What kind of information can I get?</strong></h4>
+    <div class="col-lg-4 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title"><img src="img/munic.png" width="300" /> </div>
+          <h5 class="card-title" style="font-weight:bold;">Municipal Offices</h5>
+          <p class="card-text help" >
+            Visit municipal offices to get information about population size, area-level socioeconomic indicators, number
+            of households...
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title"><img src="img/healthfac.png" width="300" /> </div>
+          <h5 class="card-title" style="font-weight:bold;">Health Facilities</h5>
+          <p class="card-text help" >
+            Visit health facilities to get information about services offered, staff-complement, health
+            statistics,...<br /><br />
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title"><img src="img/envir.png" width="300" /> </div>
+          <h5 class="card-title" style="font-weight:bold;">Environmental Health Offices</h5>
+          <p class="card-text help" >
+            Visit environmental health offices to get information about the environment: altitude, termal excursion, air
+            pollution levels,...<br /><br />
+          </p>
+        </div>
+      </div>
+    </div>
+  <!--</div>-->
+</div>
+<!-- Design -->
+<div id="design" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Building a data collection tool</strong></h4>
+  <p class="card-text help">
+   You can design you data collection tool for the survey by dragging the relevant questions/measurements from the lists on the right and dropping 
+   them on the left section (<strong>Current tool</strong>).
+  </p> 
+  <div style = "margin: 50px;">
+    <img src = "img/tool_build.png"  style = "display: block;  margin-left: auto; margin-right: auto; "></img>
+  </div>
+  <p class="card-text help" >
+  The <strong>RESET</strong> button empties the Current tool section and resets the lists of available items to the default status. 
+  </p>  
+</div>
+<!-- Strategy -->
+<div id="strategy" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Defining a sampling strategy</strong></h4>
+  <p class="card-text help" >
+    To define the sampling strategy, you must first identify the <strong>target population</strong> and choose
+    (1) the geographic scope (either the whole SurveyLab or specific Regions), (2) the desired age range, and (3) the sex of the potential respondents.
+  </p>
+  <br/>
+  <p class="card-text help" >
+  The <strong>Sampling stages section</strong> requires information regarding  <strong>stratification</strong> 
+  (none, by Region, by Town, by Suburb), <strong>clustering</strong> (none, one level, two levels) and 
+  <strong>sample sizes</strong> at the various levels.
+  </p>
+  <p class="card-text help" >
+  Depending on the choices, different type of information need to be provided. The most complex case is when the chosen strategy is two-level stratified 
+  random sampling, where information needs to be provided on stratification, clustering variables and sample size at each level, type of cluster
+  selection (proportional to size or not). 
+  </p>
+  <div style = "margin: 50px;">
+    <img src = "img/multistage.png"  style = "display: block;  margin-left: auto; margin-right: auto; "></img>
+  </div>
+  <p class="card-text help" >
+  If the you don't make any selection, the system uses a default sampling strategy with these characteristics (simple random sampling of size 100): 
+  </p>
+  <ul class = "help">
+    <li><strong>Target population</strong>: whole surveylab, both sexes, age range 15+</li>
+    <li><strong>Stratification</strong>: None</li>
+    <li><strong>Clusters</strong>: None</li>
+    <li><strong>Sample size:</strong> 100 </li>
+  </ul>
+  <br/>
+  <p class="card-text help" >
+  <strong>Note</strong>: it is your responsibility to ensure that the sampling parameters are meaningful. The strategy page will accept any set of parameters. 
+  Only at the sampling stage, when the actual selection of the respondents takes place, an incongruent request (i.e. requesting to select a number of 
+  clusters greater than the number of clusters in the stratum) will cause the impossibility of carrying out the procedure as requested.  
+  </p>  
+</div>
+
+<!-- Sample -->
+<div id="sample" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Selecting households and Individuals</strong></h4>
+  <p class="card-text help" >
+   Two types of sample selection are possible:
+  </p>
+  <ul class = "help">
+    <li><strong>Systematic (manual) sampling</strong></li>
+    <li><strong>Random sampling</strong></li>
+  </ul>
+  <br/>
+  <p class="card-text help" >
+  With the <strong>systematic sampling strategy</strong>, you conduct a manual selection of the individuals to be included 
+  in the sample. The procedure includes (1) Selection of towns, (2) Selection of households within a town and (3) election of individuals within a household.
+ </p>
+ <p class="card-text help" >
+  With the <strong>random sampling strategy</strong>, the system will randomly sample the population according to the strategy 
+  defined in the Strategy page. 
+ </p>
+ <br/>
+ <p class="card-text help" >
+  In both cases, the results of the sampling is visualised by pressing the <strong>OVERVIEW</strong> button. If the system 
+  identifies some incongruence in the sampling strategy (such as the request of selecting in a stratum more individuals than those available in the 
+  population), you'll be notified. If the problems has a solution (i.e. the sampling strategy is, overall, possible and the only consequence is that
+  in some strata all individuals are selected), the sampling proceeds and this symbol is displayed over the map:
+</p>
+<div style = "margin: 50px;">
+    <img src = "img/danger.png"  style = "display: block;  margin-left: auto; margin-right: auto; "></img>
+  </div>
+ <p class="card-text help" >
+  If the problem has no solution and the sampling strategy needs to be revised, the sampling is not done, and this message is displayed:
+</p>
+ <div style = "margin: 50px;">
+    <img src = "img/error.png"  style = "display: block;  margin-left: auto; margin-right: auto; "></img>
+  </div> 
+</div>
+
+<!-- Power -->
+<div id="power" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Power analysis</strong></h4>
+  <p class="card-text help" >
+    In this Power analysis page, you can conduct a preliminary analysis of the <strong>precision</strong> that can be obtained with the chosen 
+    sampling strategy. You need to select <strong>outcome</strong> for which the results need to be calculated, and the basic parameters upon which the calculation 
+    will be based (<strong>expected proportion/standard deviation</strong>, <strong>design effect</strong> and <strong>minimum response rate</strong>). 
+    Alternatively, the system can calculate the parameters from the underlying population, when the you checks the “<strong>Auto</strong>” checkbox. 
+  </p>
+  <p class="card-text help" >
+  The <strong>Precision and cost</strong> panel will show the results of the calculation, which include an estimate of the total survey cost and unit cost. 
+  The system estimates administration times and costs using an algorithm that attributes different weights to different types of items in the 
+  data collection tool (e.g. it attributes longer administration times and costs to anthropometric measurements compared to questions). 
+  The calculations take into account increases in setup costs, when a survey spans across multiple towns, and the costs within each town based on 
+  the total distance a fieldworker has to walk/drive to visit each selected household.
+  </p>
+</div>
+
+<!-- Survey -->
+<div id="survey" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Conducting a survey</strong></h4>
+  <p class="card-text help" >
+   When a valid sample has been selected and a data collection tool has been defined in the respective pages, you can start a (virtual) data collection. 
+   The survey can be conducted town by town, by dragging the data collector to the respective town:
+  </p> 
+   <div style = "margin: 50px;">
+    <img src = "img/survey.png"  style = "display: block;  margin-left: auto; margin-right: auto; "></img>
+  </div> 
+   <p class="card-text help" >
+   or for all towns at the same time, by pressing the <strong>SURVEY</strong> button. 
+   </p>
+</div>
+
+<!-- Analyse -->
+<div id="analyse" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Check your data</strong></h4>
+  <p class="card-text help" >
+    This <strong>Analysis</strong> page summarises the results of the survey and allows for comaprions with the 'true' population values. You can find: 
+  </p>
+  <ul  class = "help">
+    <li>A summary of the sample and data collection tool</li>
+    <li>A comparison of the estimated survey cost and the actaul cost (whicht takes into account the response rates)</li>
+    <li>A graphical/tabular summary of the response rates (total, by region and by town)</li>
+  </ul>
+   <p class="card-text help" >
+    The comparions of the survey results with the 'true' population values is done variable by variable, and can refer tp the whole population or by subgroup. 
+  </p>
+</div>
+
+<!-- Upload -->
+<div id="upload" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+  <h4><strong><i class="fa fa-circle-info icostyle_menu"></i> Sharing survey results</strong></h4>
+  <p class="card-text help" >
+   You can upload estimates and their confidence intervals (or full results datasets) so can be vsualised by the Administrators. 
+  </p>
+</div>
+
+<!-- Visualise -->
+<div id="visualise" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+</div>
+
+<!-- Users -->
+<div id="users" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+</div>
+
+<!-- Settings -->
+<div id="settings" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+</div>
+
+<!-- Logs -->
+<div id="logs" class="row" style="top:20px; margin-bottom:50px; margin-top:50px; text-align: justify;">
+</div>

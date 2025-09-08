@@ -1,0 +1,489 @@
+/* Custom css, v 3.0, April 2024 */
+/* Annibale Cois (annibalecois@gmail.com) */ 
+
+
+/* DASHBOARD STRUCTURE (OVERRIDES SHINYDASHBOARD DEFAULTS)*/ 
+
+.skin-black .main-header .navbar{
+  background-color:#FFFFFF00;
+}
+
+.skin-black .main-header .logo {
+  background-color: #222d32;
+  border: none;
+}
+
+.skin-black .main-header .logo:hover {
+  background-color: #222d32;
+  border: none;
+}
+
+.skin-black .main-header .navbar .navbar-custom-menu .navbar-nav>li>a, .skin-black .main-header .navbar .navbar-right>li>a {
+    border: none;
+}
+
+.skin-black .main-header .navbar .navbar-custom-menu .navbar-nav>li>a:focus, .skin-black .main-header .navbar .navbar-right>li>a:focus {
+    background-color: #FFFFFF00;
+    color: #FFFFFF;
+}
+
+.skin-black .main-header .navbar .sidebar-toggle {
+   background-color: #FFFFFF00;
+   font-size: 25px;
+   font-weight: bold;
+   color: #000000;
+   border: none;
+   margin-top:6px;
+}       
+
+.skin-black .main-header .navbar .sidebar-toggle:hover {
+   background-color: #FFFFFF00;
+   color: #F05222;
+}
+
+.skin-black .main-header .navbar .dropdown-toggle {
+   background-color: #FFFFFF00;
+   font-size: 25px;
+   color: #000000; 
+}   
+
+.skin-black .main-header .navbar .dropdown-toggle:hover {
+   background-color: #FFFFFF00;
+   color: #F05222; 
+} 
+
+.skin-black .main-header .navbar .nav>li>a {
+   color: #000000;
+}  
+   
+.skin-black .main-header .navbar .nav>li>a:hover {
+   background-color: #FFFFFF00;
+   color: #F05222;
+}       
+
+.skin-black .main-footer {
+  background-color: #11ffee00;;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  color: #000000;
+}
+
+.skin-black .main-footer .pull-right {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+}
+
+
+.dropdown-shinyWidgets {
+  background-color: #FFFFFF;
+  box-shadow: 2px 2px 2px 2px #999999;
+}
+
+.content-wrapper{  
+  background-image: url("../img/splash_dark.png");
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+}
+
+.navbar-nav>.messages-menu>.dropdown-menu>li.header, .navbar-nav>.notifications-menu>.dropdown-menu {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: #fff;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f4f4f4;
+    color: #444;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.inactiveLink {
+  pointer-events: none; 
+  cursor: default;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* COMMON ELEMENTS */
+
+.sidetext {
+  color:#F05222;
+}
+
+.lab {
+  color:#F05222; 
+  font-style: italic;
+}
+
+.icostyle_menu {
+  color: #F05222; 
+} 
+
+.icostyle_header {
+  font-size: 25px; 
+}      
+
+#login-button {
+  color: #000000!important;
+  background-color: #FFFFFF;
+  border-color: #000000;
+  margin-top: 20px;
+  }
+  
+#login-button:hover {
+    background-color: #F05222!important;
+    color: #000000!important;
+}
+
+/* IMPORTED FROM MDB.CSS */
+
+.text-white{color:#fff!important}
+
+.mb-3{margin-bottom:1rem!important}
+.mb-4{margin-bottom:1.5rem!important}
+
+.btn{position:relative;top:-1px;}
+
+
+    /* BUTTONS */
+
+.btn {
+  color: #FFFFFFF;
+  border-radius: 5px !important;
+  border-width: 4;
+}
+
+.btn:focus {
+  color:#F05222!important;
+}
+
+.btn:active {
+  color:#F05222!important;
+}
+
+.btn:hover {
+ color:#F05222!important;
+}
+
+.btn-outline-light {
+  -webkit-box-shadow:0 0 0 .25rem hsla(0,0%,98.4%,.5);
+  box-shadow:0 0 0 .25rem hsla(0,0%,98.4%,.5);
+}
+
+.btn-lg{
+  padding:.625rem 1.5625rem .5625rem; margin: 10px;
+}
+
+/* IMPORTED FROM custom.css */
+
+.container__watermark {
+  /* Text color */
+  color: rgba(0, 0, 0, 0.2);
+
+  /* Text styles */
+  font-size: 6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  /* Rotate the text */
+  transform: rotate(-45deg);
+
+  /* Disable the selection */
+  user-select: none;
+}
+
+.map-control-zoomin {
+  /* background: url(../img/zoom-in.svg) center no-repeat; */
+  background-color:rgb(70,110,171);
+  display: block;
+  left: 0px;
+ }
+ 
+ .map-control-zoomout {
+  /* background: url(../img/zoom-out.svg) center no-repeat; */
+  background-color:rgb(70,110,171);
+  display: block;
+  left: 0px;
+ }
+ 
+ .dropdownbutton{
+  background-color: #393D3F !important;
+  border: solid; border-radius: 4px; border-width: 1px; border-color:#339FFF;
+  color: #339FFF; text-align: center; font-weight:bold; font-size: 12px;
+  opacity: 0.5 !important;
+}
+
+    /** Popups **/
+
+.list1 {
+  background-color: rgba(255,255,255,1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.list2 {
+  background-color: rgba(255,255,255,1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.list3 {
+  background-color: rgba(255,255,255,0);
+  border: none;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+.list4 {
+  background-color: rgba(255,255,255,1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+th {
+  text-align: left;
+  padding: 8px;
+  font-weight: normal;
+}
+
+td {
+  text-align: right;
+  padding: 8px;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+tr:nth-child(odd) {
+  background-color: #00FFFF;
+}
+
+.stat {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Drag & drop */
+
+.connectedSortable, .sortable, .exclude, .handles {
+      margin: auto;
+      padding: 0;
+      width: 310px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+  .sortable.grid {
+      overflow: hidden;
+  }
+  .connectedSortable li, .sortable li, .exclude li, .handles li {
+      list-style: none;
+      border: 1px solid #CCC;
+      background: #F6F6F6;
+      font-family: "Tahoma";
+      color: ##000000;
+      margin: 5px;
+      padding: 5px;
+      height: 34px;
+  }
+  .handles span {
+      cursor: move;
+  }
+  li.disabled {
+      opacity: 0.5;
+  }
+  .sortable.grid li {
+      line-height: 80px;
+      float: left;
+      width: 80px;
+      height: 80px;
+      text-align: center;
+  }
+  li.highlight {
+      background: #FEE25F;
+  }
+  #connectedSortable {
+      width: 440px;
+      overflow: hidden;
+      margin: auto;
+  }
+  .connectedSortable {
+      float: left;
+      width: 200px;
+  }
+  .connectedSortable.no2 {
+      float: left;
+      width: 500px;
+  }
+  li.sortable-placeholder {
+      border: 1px dashed #CCC;
+      background: none;
+  }
+
+/* Design page */
+
+li.qi {
+  background: darkorange; 
+  border-radius: 10px;
+  height: auto;
+}
+
+li.mi {
+  background: darkseagreen; 
+  border-radius: 10px;
+  height: auto;
+}
+
+.quest {
+   display:none;
+}
+.quest:first-child {
+  display: block;
+ }
+
+.unsaved {
+  text-decoration: underline dotted;
+  color: rgb(0.5,0.5,0.5)!important;
+}
+
+/* Survey page */
+
+.f1 {
+  width: 175px; 
+  float: left;
+  padding-bottom: 15px;
+}
+
+.f2a {
+  width: 55px; 
+  height: 55px;
+  margin-right: 10px;
+  float: left;
+  background: url("../img/mapicon.png") center no-repeat;
+}
+
+.f2b {
+  width: 55px; 
+  height: 55px;
+  margin-right: 10px;
+  float: left;
+  background: url("../img/mapicons.png") center no-repeat;
+}
+
+.f3 {
+  width: 100px; 
+  float: left; 
+  text-align: left;
+} 
+
+.f4 {
+  clear:both;
+  color: rgb(240,82,34);
+}
+
+.f5 {
+  margin-top: 6px;
+  color: rgb(240,82,34);
+}
+
+.f5a {
+  font-weight: bold;
+  color: rgb(240,82,34);
+  
+}
+
+.f5b {
+  margin-top: 6px;
+  color: rgb(240,82,34);
+  margin-left:-20px;
+}
+
+/* Strategy page */
+
+.container5 {
+  display: flex; 
+}
+
+.block5 {
+  display: inline-block; 
+  vertical-align: middle; 
+  margin-left: 0px; 
+  margin-top: 5px;
+}
+
+.targetb {
+  position:relative; 
+  border-color: #000000; 
+  width: 160px;
+}
+
+.ddownb {
+  box-shadow:none; 
+  position: relative; 
+  left: 0px; 
+  color:#000000;
+}
+
+.ddmenu {
+ margin-left: 
+ 10px; max-height: 
+ 600px; 
+ overflow-y: scroll; 
+ background-color: #DDDDDD; 
+}
+
+/* Enable/Disable  */
+
+.inactiveItem {
+  cursor: not-allowed;
+  color: grey !important;
+}
+
+.inactiveItem:active {
+   pointer-events: none;
+}
+
+/* Notification (overrides Shiny defaults) */
+
+.shiny-notification {
+          background: #880000;  
+          opacity: 1;
+          color: #FFFFFF;
+          /* width: 500px;
+          height: 500px; 
+          position: fixed;
+          top: calc(50%);
+          left: calc(50%);
+          transform: translate(-50%, -50%);*/ /* Centers the notification precisely */
+        }
+
+/* Data collector animation */
+
+.moving {
+  position: relative;
+  animation: bounce 10s infinite alternate linear;
+}
+
+@keyframes bounce {
+  from { left: 50px; }
+  to   { left: 840px; }
+}
+
+/* Help sections */
+
+.help {
+  font-size: 120%;
+}
+
+
+

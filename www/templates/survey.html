@@ -1,0 +1,76 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:0px;">
+         <h3>Survey</h3>   
+         <br/>
+          <div class="col-md-1 mb-1"> 
+            <img src="img/people.png" style = "height: 100px; margin-left: -20px;"/>
+          </div>
+          <div class="col-md-2 mb-2"> 
+            <h4 id ="sample_hh_title1" class = "defcol">Sample</h4>
+            <div style = "font-weight: 800;">Towns: <span class = "defcol" id="tssize_survey">0</span></div>
+            <div style = "font-weight: 800;">Households: <span class = "defcol" id="hssize_survey">0</span></div>
+            <div style = "font-weight: 800;">Individuals: : <span class = "defcol" id="issize_survey">0</span></div>
+          </div>        
+          <div class="col-md-1 mb-1" > 
+            <img src="img/tool.png" style = "height: 100px; margin-left: -20px;"/>
+          </div>
+          <div class="col-md-2 mb-1" style = "margin-left:0px;"> 
+            <h4 id ="sample_hh_title1" class = "defcol">Tool</h4>
+            <div style = "font-weight: 800;">Items: <span class = "defcol" id="qitems_survey">0</span></div>
+            <div style = "font-weight: 800;">Measurements: <span class = "defcol" id="mitems_survey">0</span></div>
+            <div style = "font-weight: 800;">Time: <span class = "defcol" id="time_survey">0</span></div>
+          </div>
+      </section>
+      <!--!Section 1: Header -->  
+      
+      <!--Section 2: Survey -->   
+      <section style="margin-top: 40px; margin-left: -20px;">
+        <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px; height: 200px;">
+              <h4><i class="fa fa-bullseye icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Survey Progress</h4>
+              <div id ="surveyprogress" class="col-md-10 mb-1" style = "width: 100%; background-color: white; display: block;">
+                <div  style = "margin-top: 0px; margin-bottom:30px; margin-left: 40px; color: black; width: 90%;">
+                  <h6>Households visited:</h6><div id="hprogress" style="background-color: green; padding-left:2px; width:1%;">0%</div> 
+                  <h6 style = "margin-top: 8px;">Individuals interviewed:</h6><div id="iprogress" style="background-color: red; padding-left:2px; width:1%">0%</div>
+                </div>
+              </div> 
+            </div> 
+            <!-- Spinner --><div id = "surveyspinner" style = "position: absolute; top: 70px; z-index: 70; visibility: hidden;"><img src="img/surveyer_busy.png" class="moving"/></div><!-- /Spinner -->
+            <div id="sampled_panel" style = "padding:10px; margin-top: 30px;">
+              <h4><i class="fa fa-bullseye icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Sampled towns</h4>
+              <div id = "sampledtowns" class="col-md-12 mb-1" style = "margin-top: 20px;"></div>  
+              <!--<div style = "clear: both;"></div>-->
+            </div>
+          </div>
+          <div class="col-md-2 mb-1"> 
+            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px;">Collection</h4>
+            <button id ="all_survey" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="allCollection()">SURVEY</button>
+            <button id ="reset_survey" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px; " onclick="resetCollection()">RESET</button>
+            <button id ="download_survey" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px; margin-top: 20px;" onclick="document.getElementById('downloadData').click();" disabled>DOWNLOAD</button>
+            <button id ="upload_survey" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="Shiny.setInputValue('results_share_trigger',Math.random())" disabled>UPLOAD</button>
+            
+            <div style = "padding-top: 30px; width: 200px; margin-left: 60px;">
+              <div><img id = "surveyer" src="img/surveyer.png" draggable="true" ondragstart="drag(event)" style="height:110px; display:block;" /></div>
+              <div><img id = "surveyer_busy" src="img/surveyer_busy.png" draggable="false" style="height:110px; display:none;"/></div>
+              <h6></h6>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--!Section 2: Survey-->
+      
+      <!--Section 3: Info  -->
+      <section><div id="help_survey"></div></section> 
+      <!--!Section 3: Info   -->
+      
+    </div>
+  </div>
+</main>
+<!-- !Main layout-->

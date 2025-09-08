@@ -1,0 +1,84 @@
+<!--Main layout-->
+<main class="mt-8">
+  <div class="container" style = "margin-top: 35px;">
+    <div class="container__wrapper">
+      <div class="container__watermark"></div>
+      <!--Section 1: Header -->     
+      <section>
+        <div class="row" style="margin-top:0px;">
+         <h3>Users (<span id = 'currentusers'></span>)</h3>   
+          </div>
+      </section>
+      <!--!Section 1: Header -->  
+      
+      <!--Section 2: Users -->   
+      <section style="margin-top: 30px; margin-left: -20px;">
+        <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px;">
+              <h4><i class="fa fa-users icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Users</h4>
+              <div id ="usertable" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px height: 400px;"></img>
+              </div>
+            </div> 
+          </div>
+          <div class="col-md-2 mb-1"> 
+            <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="removeUsers()">REMOVE USER</button> 
+           </div>
+        </div>  
+        <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px;">
+              <h4><i class="fa fa-user-plus icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> New user</h4>
+              <form name = "newuserform"> 
+                <div class="formcontainer">
+                  <span class= "defcol">
+                    <label style = "margin-left: 10px;">User<input type="text" class="form-control" id="user_user" name="user_user" value="" style = "width: 200px;"></input></label>
+                    <label style = "margin-left: 10px;">Name<input type="text" class="form-control" id="name_user" name="name_user" value="" style = "width: 200px;"></input></label>
+                    <label style = "margin-left: 10px;">Permissions
+                      <select id = "permissions_user" class="form-control" name="permissions_user" style = "width: 200px;">
+                        <option value="standard">Standard</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    </label>
+                  </span>
+              </div>
+            </form>
+          </div>
+        </div> 
+      <div class="col-md-2 mb-1"> 
+       <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="addUser(newuserform)">ADD USER</button> 
+      </div>
+     </div> 
+     <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
+          <div class="col-md-10 mb-1">
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px;">
+              <h4><i class="fa fa-database icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> New userbase</h4>
+              <form name = "newbaseform"> 
+                <div class="formcontainer">
+                  <span class= "defcol">
+                    <label style = "margin-left: 10px;">Database (.RData file)<select class="form-control" id="file_user" name="file_user" value="" style = "width: 500px;"> 
+                      <option value="default">Default</option>
+                      <option value="workshop">Workshop</option>
+                      <option value="new">New</option>
+                    </select></label>
+                  </span>
+              </div>
+            </form>
+          </div>
+        </div> 
+      <div class="col-md-2 mb-1"> 
+       <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="addUserbase(newbaseform)">UPLOAD</button> 
+       <label style = "margin-left: 10px;">Confirm <input type="checkbox" id="confirm_user" name="confirm_user"></input></label>
+      </div>
+     </div> 
+      </section>  
+      <!-- !Section 2: Users -->     
+
+      <!--Section 3: Info  -->
+      <section><div id="help_users"></div></section> 
+      <!--!Section 3: Info   -->
+      
+    </div>
+  </div>
+</main>
+<!-- !Main layout-->
