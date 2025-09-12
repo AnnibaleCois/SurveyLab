@@ -819,6 +819,7 @@ server <- function(input, output, session) {
               colnames(d)[1:3] <- c("W", "A", "S")
               d$S <- as.numeric(d$S)
               d$A <- as.numeric(d$A)
+              d$R <- as.numeric(d$REGION)
               d$HR <- ""
               d$IR <- ""
 
@@ -829,7 +830,7 @@ server <- function(input, output, session) {
 
               # INDIVIUAL AND ITEM CONSENT
 
-              d[d$HR == "Consent" & !is.na(d$HR),]$IR <- virr(d[d$HR == "Consent", ]$A, d[d$HR == "Consent", ]$S)
+              d[d$HR == "Consent" & !is.na(d$HR),]$IR <- virr(d[d$HR == "Consent", ]$A, d[d$HR == "Consent", ]$S, d[d$HR == "Consent", ]$R)
               d[d$IR != "Consent" & !is.na(d$IR),q$VARIABLE] <- NA
            
               for (i in 1:length(q$VARIABLE)) {
@@ -923,19 +924,19 @@ server <- function(input, output, session) {
             }
           }
         },
-        error = function(e) {
-          # Log the error in the Server Log and the console (only seen by administrators)
-          session$sendCustomMessage(type = "handler_logs", list(e$message, credentials()$info[1][[1]],"target estimates"))
-          message("Estimation error: ", e$message) # log to console
-          # Notify the user
-          output <- paste("Something went wrong: check your inputs.")
-          showNotification(
-            ui = output,
-            duration = NULL,
-            closeButton = TRUE,
-            type = "error"
-          )
-        }
+      error = function(e) {
+        # Log the error in the Server Log and the console (only seen by administrators)
+        session$sendCustomMessage(type = "handler_logs", list(e$message, credentials()$info[1][[1]],"target estimates"))
+        message("Estimation error: ", e$message) # log to console
+        # Notify the user
+        output <- paste("Something went wrong: check your inputs.")
+        showNotification(
+          ui = output,
+          duration = NULL,
+          closeButton = TRUE,
+          type = "error"
+        )
+      }
       )
     }
   ) # SURVEY TARGET POPULATION (trigger: input$survey_collect_trigger)
@@ -1073,7 +1074,6 @@ server <- function(input, output, session) {
             }
 
             DP <- DP[complete.cases(DP), ]
-            
             colnames(DP) <- c("Variable", "Group")
             TABLE_POP <- NULL
             if (OUTCOME %in% CATEGORICAL) {
@@ -1211,21 +1211,31 @@ server <- function(input, output, session) {
   
   observeEvent(input$add_users, {
     adduser <- req(input$add_users)
-    currentusers <- load_userbase(auth = AUTHTYPE)$user 
-     if (adduser[1] == "text") {
-       adduser[1] <- "text1"
-    }   
+    currentusers <- load_userbase(auth = AUTHTYPE)$user
     user <- adduser[1]
-    if (user %in% currentusers) {
-      i <- 1
-      while (user %in% currentusers) {
-        user <- paste0(adduser[1],i)
+
+    if (!(user %in% currentusers)) {
+      if (str_length(adduser[1]) >= 1 & adduser[1] != " " & str_length(adduser[2]) >= 1 & adduser[2] != " ") {
+        add_userbase(user = user, name = adduser[2], permissions = user <- adduser[3], auth = AUTHTYPE)
+        user_base <- req(load_userbase(AUTHTYPE))
+        user_base <- user_base %>% mutate(`#` = c(1:nrow(user_base)))
+        session$sendCustomMessage(type = "handler_users_table", list(user_base[, c("#", "user", "name", "permissions")]))
+      } else {
+        showNotification(
+          ui = "Username & name cannot be empty.",
+          duration = NULL,
+          closeButton = TRUE,
+          type = "error"
+        )
       }
-    } 
-    add_userbase(user = user, name = adduser[2], permissions = user <- adduser[3], auth = AUTHTYPE)
-    user_base <- req(load_userbase(AUTHTYPE)) 
-    user_base <- user_base %>% mutate(`#` = c(1:nrow(user_base)))
-    session$sendCustomMessage(type = "handler_users_table", list(user_base[, c("#","user","name","permissions")]))
+    } else {
+      showNotification(
+        ui = "Username not available.",
+        duration = NULL,
+        closeButton = TRUE,
+        type = "error"
+      )
+    }
   })
   
   observeEvent(input$add_userbase, {
@@ -1240,6 +1250,21 @@ server <- function(input, output, session) {
       session$sendCustomMessage(type = "handler_users_table", list(new[, c("#","user","name","permissions")]))
     }
   })
+  
+  # DOWNLOAD USERBASE 
+  
+  output$downloadUserbase <- downloadHandler(
+    filename = function() {
+      paste("userbase:", format(Sys.time(), format = "%F:%R"), ".RData", sep = "")
+    },
+    content = function(file) {
+      currentuserbase <- load_userbase(auth = AUTHTYPE)
+      save(currentuserbase, file = file)
+    },
+    contentType = "text/csv"
+  )
+  outputOptions(output, "downloadUserbase", suspendWhenHidden = FALSE)
+  
   
   # When a new session starts, increase count
   isolate({
@@ -1265,6 +1290,7 @@ server <- function(input, output, session) {
   
   observeEvent(input$update_settings, {
     data <- req(input$update_settings)
+    
     uthrp <- as.numeric(data[c(2:4,6:8,10:12)])
     uthrp <- matrix(uthrp, nrow = 3, ncol = 3, byrow = TRUE)
     uthrp <- uthrp / rowSums(uthrp)
@@ -1277,21 +1303,27 @@ server <- function(input, output, session) {
     IRR <<- round(utirp,2)
     IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
     
-    FATIG <<- max(1,round(as.numeric(data[33]),2))
-    RGEN <<- data[34]
+    utrrp <- as.numeric(data[c(33:37)])
+    RRR <<- round(utrrp,2)
+    RRRDF <- t(data.frame(RRR))
 
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,FATIG,RGEN))
+    FATIG <<- max(1,round(as.numeric(data[38]),2))
+    RGEN <<- data[39]
+    
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
   })
   
   observeEvent(input$default_settings_trigger, {
     HRR <<- HRR_DEFAULT
     IRR <<- IRR_DEFAULT
+    RRR <<- RRR_DEFAULT
     FATIG <<- FATIG_DEFAULT
     RGEN <<- RGEN_DEFAULT
     HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
     IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
-    
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,FATIG,RGEN))
+    RRRDF <- t(data.frame(RRR))
+
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
   })
   
   # TRANSFER GLOBAL PARAMETERS TO JAVASCRIPT CODE
@@ -1307,7 +1339,9 @@ server <- function(input, output, session) {
   
   HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
   IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
-  session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,FATIG,RGEN))
+  RRRDF <- t(data.frame(RRR))
+
+  session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
 
   # SERVICE VARIABLES
   
@@ -1328,8 +1362,8 @@ server <- function(input, output, session) {
   vhrr <- Vectorize(hrr)
   
   # INDIVIDUAL RESPONSE
-  irr <- function(agecat, sex) {
-    index = try(rbinom(1, 1, IRR[sex, agecat]) + 1, silent = TRUE) 
+  irr <- function(agecat, sex, region) {
+    index = try(rbinom(1, 1, IRR[sex, agecat]*RRR[region]) + 1, silent = TRUE) 
     if (is(index,"try-error")) {
       index <- 1
     }

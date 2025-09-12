@@ -188,6 +188,7 @@ QCOST <- QCOST_DEFAULT
 HRR <- HRR_DEFAULT
 IRR <- IRR_DEFAULT
 TRR <- TRR_DEFAULT
+RRR <- RRR_DEFAULT 
 FATIG <- FATIG_DEFAULT
 TQ <- TQ_DEFAULT
 TM <- TM_DEFAULT
@@ -221,6 +222,10 @@ load(paste0("data/",DATAVERSION,"/items.RData"))           # Items for data coll
 # SUBSET POPULATION DATA 
 
 P <- P[,unique(c("IID","TOWN","Town_Code","REGION","SUBURB","HID","MEMBER","GLOBAL_WINDEX","WEALTH","SEX","AGE","AGECAT","AGECAT1","POPGROUP",Q$VARIABLE))]
+
+# ADD WEALTH TERTILE
+
+P$WEALTHT <- as.numeric(cut(P$WEALTH, breaks = quantile(P$WEALTH, probs = seq(0,1,length.out=4), na.rm = TRUE)))
 
 # CATEGORISE VARIABLE BY SCALE OF MEASUREMENT 
 

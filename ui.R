@@ -321,7 +321,8 @@ ui <- dashboardPage(
         tabItem(tabName = "logs", htmlTemplate("www/templates/logs.html"))
       ),
       
-      downloadButton("downloadData", label = "", style = "display:none;"),          # Invisible download button
+      downloadButton("downloadData", label = "", style = "display:none;"),          # Invisible button for data download
+      downloadButton("downloadUserbase", label = "", style = "display:none;"),    # Invisible button for userbase download
       
       tags$script(type="text/javascript", src="js/jquery.bpopup-0.11.0.min.js"),    # Popup management library
       tags$script(type="text/javascript", src="js/panzoom.js"),                     # Panzoom library

@@ -52,7 +52,7 @@
      <div class="row" style = "margin-top: 30px; padding:10px; margin-bottom: 20px;">
           <div class="col-md-10 mb-1">
             <div style = "border: 2px dashed rgb(200,200,200); padding:10px;">
-              <h4><i class="fa fa-database icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> New userbase</h4>
+              <h4><i class="fa fa-database icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Userbase</h4>
               <form name = "newbaseform"> 
                 <div class="formcontainer">
                   <span class= "defcol">
@@ -67,9 +67,10 @@
           </div>
         </div> 
       <div class="col-md-2 mb-1"> 
+       <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px; margin-top: 20px;" onclick="document.getElementById('downloadUserbase').click();">DOWNLOAD</button>
        <button type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px;" onclick="addUserbase(newbaseform)">UPLOAD</button> 
        <label style = "margin-left: 10px;">Confirm <input type="checkbox" id="confirm_user" name="confirm_user"></input></label>
-      </div>
+     </div>
      </div> 
       </section>  
       <!-- !Section 2: Users -->     

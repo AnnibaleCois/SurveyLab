@@ -23,7 +23,7 @@ Shiny.addCustomMessageHandler("handler_users_current",
 );
 
 function addUser(FORM){
-  Shiny.setInputValue('add_users',[FORM.user_user.value,FORM.name_user.value,FORM.permissions_user.value]);
+  Shiny.setInputValue('add_users',[FORM.user_user.value,FORM.name_user.value,FORM.permissions_user.value,Math.random()]);
 }
 
 function addUserbase(FORM){ 
@@ -40,4 +40,5 @@ function removeUsers(){
   }
   Shiny.setInputValue('delete_users',dusers);
 }
+
 

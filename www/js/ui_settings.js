@@ -3,6 +3,7 @@
 
 let thrp = {}; 
 let tirp = {}; 
+let trrp = {}; 
 
 Shiny.addCustomMessageHandler("handler_settings_tables",
   function(data) {
@@ -38,25 +39,43 @@ Shiny.addCustomMessageHandler("handler_settings_tables",
     ]
   });
   tirp = table2;
-  document.getElementById("fatiguecoeff").value = data[2];
-  document.getElementById("randomseeds").value = data[3];
   
+  TABLE3 = data[2];
+    var table3 = new Tabulator("#irespprobregion", {
+    height: "80px",
+    data:TABLE3, //assign data to table
+    columns: [
+      {title:"Beria", field:"0", editor:"input"},
+      {title:"Bridford", field:"1", editor:"input"},
+      {title:"Central Region", field:"2", editor:"input"},
+      {title:"Northern Peninsula", field:"3", editor:"input"},
+      {title:"South East", field:"4", editor:"input"},
+    ]
+  });
+  trrp = table3;
+  
+  document.getElementById("fatiguecoeff").value = data[3];
+  document.getElementById("randomseeds").value = data[4];
  }
 );
 
 function updateSettings() {
   let updatedData1 = thrp.getData();
   let uthrp = {rows: updatedData1};
-  let uthrp1 = transformToMatrix(uthrp)
+  let uthrp1 = transformToMatrix(uthrp);
  
   let updatedData2 = tirp.getData();
   let utirp = {rows: updatedData2};
-  let utirp1 = transformToMatrix(utirp)
- 
+  let utirp1 = transformToMatrix(utirp);
+  
+  let updatedData3 = trrp.getData();
+  let utrrp = {rows: updatedData3};
+  let utrrp1 = transformToMatrix(utrrp);
+
   let fatig = document.getElementById("fatiguecoeff").value;
   let rseed = document.getElementById("randomseeds").value;
   
-  Shiny.setInputValue('update_settings',[[uthrp1],[utirp1],[fatig],[rseed]]);
+  Shiny.setInputValue('update_settings',[[uthrp1],[utirp1],[utrrp1],[fatig],[rseed]]);
   
 }
 

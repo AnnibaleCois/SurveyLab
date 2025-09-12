@@ -6,6 +6,7 @@ QCOST_DEFAULT,numeric,0.05,Cost for each 10 items of questionnaire length
 HRR_DEFAULT,matrix,"0.98, 0.01, 0.01; 0.95, 0.04, 0.01; 0.90, 0.15, 0.05","Household response probabilities by wealth index - wealth (rows): 1,2,3; response (columns): CONSENT, REFUSAL, ABSENT)"
 IRR_DEFAULT,matrix,"0.95, 0.95, 0.95, 0.92, 0.90, 0.92, 0.92, 0.93, 0.94;0.95, 0.95, 0.95, 0.92, 0.90, 0.92, 0.92, 0.93, 0.94","Individual response probabilities by age and sex - AGECAT (columns): 0-4,5-9,10-14,15-24,25-34,35-44,45-54,55-64,65+; SEX (rows): Males, Females"
 TRR_DEFAULT,vector,"0.95, 0.90","Base item response probabilities by type of questionnaire - type: Q,M"
+RRR_DEFAULT,vector,"1,1,0.7,1,1",Base household response probabilities by region
 FATIG_DEFAULT ,numeric,1.01,Fatigue coefficient
 TQ_DEFAULT,numeric,0.5,"Administration time (per M item, in minutes)"
 TM_DEFAULT,numeric,5,"Administration time (per Q item, in minutes)"
