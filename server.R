@@ -1364,7 +1364,7 @@ server <- function(input, output, session) {
   # INDIVIDUAL RESPONSE
   irr <- function(agecat, sex, region) {
     index = try(rbinom(1, 1, IRR[sex, agecat]*RRR[region]) + 1, silent = TRUE) 
-    if (is(index,"try-error")) {
+    if (inherits(index, "try-error")) {
       index <- 1
     }
     return(c("Refusal", "Consent")[index])
@@ -1375,8 +1375,8 @@ server <- function(input, output, session) {
   # ITEM RESPONSE
   itrr <- function(type, i) {
     index = try(rbinom(1, 1, TRR[ifelse(type == "M", 1, 2)] * FATIG^(-floor(i / 10))) + 1, silent = TRUE)
-    if (is(index,"try-error")) {
-      index <- 1
+    if (inherits(index, "try-error")) {
+      index <- 2
     }
     return(c(FALSE, TRUE)[index])
   }
