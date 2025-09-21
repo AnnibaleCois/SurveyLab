@@ -80,6 +80,14 @@ function updateSettings() {
 }
 
 function resetSettings() {
-  Shiny.setInputValue('default_settings_trigger', Math.random());
+  let m = 1 + Math.abs(Math.random());
+  Shiny.setInputValue('default_settings_trigger', m);
 }
+
+function resetSettingsPerfect() {
+  let m = -1*Math.abs(Math.random()) - 1;
+  Shiny.setInputValue('default_settings_trigger', m);
+}
+
+
 

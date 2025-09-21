@@ -162,12 +162,12 @@ for (i in c(1: length(SETTINGS$parameter))) {
     assign(par,matrix(DATA, nrow = NROW, ncol = NCOL, byrow = TRUE))
   }
 }
-IRR_DEFAULT[1,] <- round(IRR_DEFAULT[1,] / 1.04,3)
-IRR_DEFAULT[2,] <- round(IRR_DEFAULT[2,] * 1.04,3)
+IRR_DEFAULT[1,] <- round(IRR_DEFAULT[1,],3)
+IRR_DEFAULT[2,] <- round(IRR_DEFAULT[2,],3)
 
 # ENABLE/DISABLE SERVER UPLOAD
 
-ENABLEUPLOAD <- 0 # ) = DISABLED, 1 = ENABLED
+ENABLEUPLOAD <- 0 # 0 = DISABLED, 1 = ENABLED
 
 ################################################################################################################################################################################
 # INTIALIZE                                                                                                                                                                    #

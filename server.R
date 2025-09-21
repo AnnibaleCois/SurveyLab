@@ -654,21 +654,21 @@ server <- function(input, output, session) {
                 if (CTYPE == "NONE" & STRATVAR != "NONE") {
                   SAMPLE <- PO[PO$IID %in% unlist(input$sam_currentSample_ilist), c(STRATVAR, POWER_OUTCOME)]
                   W <- 1 / session$userData$survey_probs$Probs / sum(1 / session$userData$survey_probs$Probs) * length(session$userData$survey_probs$Probs)
-                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~0, strata = SAMPLE[, STRATVAR], weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
+                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~1, strata = SAMPLE[, STRATVAR], weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   X2 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~1, strata = NULL, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   POWER_EXPDEFF <- round(max(attr(X1, "var")) / max(attr(X2, "var")), 1)
                   rm(SAMPLE,W,X1,X2)
                 } else if (CTYPE != "NONE" & STRATVAR == "NONE") {
                   SAMPLE <- PO[PO$IID %in% unlist(input$sam_currentSample_ilist), c(CLUSTVAR1, POWER_OUTCOME)]
                   W <- 1 / session$userData$survey_probs$Probs / sum(1 / session$userData$survey_probs$Probs) * length(session$userData$survey_probs$Probs)
-                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~0, strata = SAMPLE[, STRATVAR], weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
+                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = SAMPLE[, CLUSTVAR1], strata = NULL, weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   X2 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~1, strata = NULL, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   POWER_EXPDEFF <- round(max(attr(X1, "var")) / max(attr(X2, "var")), 1)
                   rm(SAMPLE,W,X1,X2)
                 } else {
                   SAMPLE <- P[P$IID %in% unlist(input$sam_currentSample_ilist), c(CLUSTVAR1, STRATVAR, POWER_OUTCOME)]
                   W <- 1 / session$userData$survey_probs$Probs / sum(1 / session$userData$survey_probs$Probs) * length(session$userData$survey_probs$Probs)
-                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~0, strata = SAMPLE[, STRATVAR], weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
+                  X1 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = SAMPLE[, CLUSTVAR1], strata = SAMPLE[, STRATVAR], weights = W, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   X2 <- svymean(as.formula(paste0("~", POWER_OUTCOME)), design = svydesign(id = ~1, strata = NULL, data = SAMPLE), na.rm = TRUE, deff = TRUE)
                   POWER_EXPDEFF <- round(max(attr(X1, "var")) / max(attr(X2, "var")), 1)
                   rm(SAMPLE,W,X1,X2)
@@ -708,7 +708,7 @@ server <- function(input, output, session) {
             rm(POWER_EXPDEFF, PREC, V1, POWER_EXPSD, POWER_EXPPROP,WORST)
             
           }
-        },
+       },
         error = function(e) {
           # Log the error in the Server Log and the console (only seen by administrators)
           session$sendCustomMessage(type = "handler_logs", list(e$message, credentials()$info[1][[1]],"power"))
@@ -950,7 +950,7 @@ server <- function(input, output, session) {
           GROUP <- input$survey_sample_vars[2]
 
           if (GROUP == "NONE") {
-            DS <- session$userData$survey_responses[, c(OUTCOME,OUTCOME)]
+            DS <- session$userData$survey_responses[, c(OUTCOME, OUTCOME)]
             DS[,2] <- "All respondents"
           } else {
             DS <- session$userData$survey_responses[, c(OUTCOME, GROUP)]
@@ -985,20 +985,20 @@ server <- function(input, output, session) {
             rm(OUTCOME, GROUP, DS,TABLE_SAMPLE)
             
           }
-        },
-        error = function(e) {
-          # Log the error in the Server Log and the console (only seen by administrators)
-          session$sendCustomMessage(type = "handler_logs", list(e$message, credentials()$info[1][[1]], "sample estimates"))
-          message("Estimation error: ", e$message) # log to console
-          # Notify the user
-          output <- paste("Something went wrong: check your inputs.")
-          showNotification(
-            ui = output,
-            duration = NULL,
-            closeButton = TRUE,
-            type = "error"
-          )
-        }
+      },
+      error = function(e) {
+        # Log the error in the Server Log and the console (only seen by administrators)
+        session$sendCustomMessage(type = "handler_logs", list(e$message, credentials()$info[1][[1]], "sample estimates"))
+        message("Estimation error: ", e$message) # log to console
+        # Notify the user
+        output <- paste("Something went wrong: check your inputs.")
+        showNotification(
+          ui = output,
+          duration = NULL,
+          closeButton = TRUE,
+          type = "error"
+        )
+      }
       )
     }
   ) # CALCULATE SAMPLE ESTIMATES (trigger: input$survey_sample_vars)
@@ -1158,6 +1158,15 @@ server <- function(input, output, session) {
         stringsAsFactors = FALSE
       )
       dbAppendTable(SHAREDTABLEDB,"shared_data_table",new_row)
+      
+      showNotification(
+        ui = "Data uploaded",
+        duration = 8,
+        closeButton = TRUE,
+        type = "message"
+      )
+      
+      
     }
   })
 
@@ -1314,14 +1323,26 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$default_settings_trigger, {
-    HRR <<- HRR_DEFAULT
-    IRR <<- IRR_DEFAULT
-    RRR <<- RRR_DEFAULT
-    FATIG <<- FATIG_DEFAULT
-    RGEN <<- RGEN_DEFAULT
-    HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
-    IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
-    RRRDF <- t(data.frame(RRR))
+    if (input$default_settings_trigger > 0) {
+      HRR <<- HRR_DEFAULT
+      IRR <<- IRR_DEFAULT
+      RRR <<- RRR_DEFAULT
+      FATIG <<- FATIG_DEFAULT
+      RGEN <<- RGEN_DEFAULT
+      HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
+      IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
+      RRRDF <- t(data.frame(RRR))
+    } else if (input$default_settings_trigger < 0) {
+      HRR <<- matrix(0, ncol = 3, nrow = 3)
+      HRR[,1] <<- 1
+      IRR <<- matrix(1, ncol = 9, nrow = 2)
+      RRR <<- c(1,1,1,1,1)
+      FATIG <<- 1
+      RGEN <<- RGEN_DEFAULT
+      HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
+      IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
+      RRRDF <- t(data.frame(RRR))
+    }
 
     session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
   })
@@ -1355,7 +1376,7 @@ server <- function(input, output, session) {
   hrr <- function(wealth) {
     index = try(which(rmultinom(1, 1, HRR[wealth, ]) == 1), silent = TRUE) 
     if (is(index,"try-error")) {
-      index <- 3
+      index <- 1
     }
     return(c("Consent", "Refusal", "Absent")[index])
   }
