@@ -27,9 +27,9 @@ Shiny.addCustomMessageHandler("handler_survey_collect",
     survey_rr = data[6];               // Response rates (household, Individual)
     survey_rrr = data[7];              // Response rates per region (household, Individual)
     survey_trr = data[8];              // Response rates per town (household, Individual)
-    survey_dsize = data[9]             // Number of records in the response dataset
-    survey_time = data[10]             // Time of teh curremnt survey
-    
+    survey_dsize = data[9];            // Number of records in the response dataset
+    survey_time = data[10];            // Time of the current survey
+
     document.getElementById("anhrr").innerHTML = survey_rr[0] + "%";
     document.getElementById("anirr").innerHTML = survey_rr[1] + "%";
     document.getElementById("antrr").innerHTML = Math.round(survey_rr[0]*survey_rr[1]/100*10)/10 + "%";
@@ -54,77 +54,46 @@ Shiny.addCustomMessageHandler("handler_survey_collect",
     let totrr = Math.round(survey_rr[0]*survey_rr[1]/100*10)/10;
     let ntotrr = Math.round((100 - totrr)*10)/10;
     
-    new Chart("rr", {
-      type: "horizontalBar",
-      data: {
-        labels: ["Response (" + totrr + "%)", "Non response (" +  ntotrr + "%)"],
-        datasets: [{
-          backgroundColor: pColors,
-          data: [totrr, 100 - totrr]
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        title: {display: false},
-        legend: {
-            display: false 
-        }
-      }
-    });
+    const survey_rrr_t = survey_rrr.Region.map((Region, i) => ({
+    Region: Region,
+    Region: survey_rrr.Region[i],
+    HRR: survey_rrr.HRR[i],
+    IRR: survey_rrr.IRR[i],
+    TRR: Math.round(survey_rrr.HRR[i]*survey_rrr.IRR[i]/100) 
+  }));
     
-    new Chart("regrr", {
-  type: "bar",
-  data: {
-    labels: survey_rrr.Region,
-    datasets: [{
-      label:"Household",
-      backgroundColor: HbarColors,
-      data: survey_rrr.HRR
-    },{
-      label:"individual",
-      backgroundColor: IbarColors,
-      data: survey_rrr.IRR
-    }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-    legend: {display: true},
-    title: {display: false},
-    scales: {
-      yAxes: [{
-        ticks: {
-          precision: 0,
-          beginAtZero: true,
-          max: 100,
-          steps: 10
-        }
-      }]
-    }
-  }
-  
-});
+    var tablerrr = new Tabulator("#regrr", {
+    height:"250px",
+    layout:"fitDataFill",
+    columns:[
+      {title:"Region", field:"Region", width:150},
+      {title:"Household [%]", field:"HRR"},
+      {title:"Individual [%]", field:"IRR"},
+      {title:"Total[%]", field:"TRR", width:420, formatter:"progress", formatterParams:{color:["#DE2D26", "#E6550D", "#2CA25F"], legend: true, legendAlign: "left"}, sorter:"number"}
+      ],
+    data: survey_rrr_t
+  });
     
-const survey_trr_t = survey_trr.Town.map((town, i) => ({
-  Town: town,
-  Region: survey_trr.Region_Name[i],
-  HRR: survey_trr.HRR[i],
-  IRR: survey_trr.IRR[i],
-  TRR: Math.round(survey_trr.HRR[i]*survey_trr.IRR[i]/100) 
-}));
+  const survey_trr_t = survey_trr.Town.map((town, i) => ({
+    Town: town,
+    Region: survey_trr.Region_Name[i],
+    HRR: survey_trr.HRR[i],
+    IRR: survey_trr.IRR[i],
+    TRR: Math.round(survey_trr.HRR[i]*survey_trr.IRR[i]/100) 
+  }));
 
-var tablerr = new Tabulator("#towrr", {
-  height:"250px",
-  layout:"fitDataFill",
-  groupBy:"Region",
-  columns:[
-    {title:"Town", field:"Town", width:150},
-    {title:"Household [%]", field:"HRR"},
-    {title:"Individual [%]", field:"IRR"},
-    {title:"Total[%]", field:"TRR", width:450, formatter:"progress", formatterParams:{color:["#DE2D26", "#E6550D", "#2CA25F"], legend: true, legendAlign: "left"}, sorter:"number"}
-    ],
-  data: survey_trr_t
-});
+  var tablerr = new Tabulator("#towrr", {
+    height:"250px",
+    layout:"fitDataFill",
+    groupBy:"Region",
+    columns:[
+      {title:"Town", field:"Town", width:150},
+      {title:"Household [%]", field:"HRR"},
+      {title:"Individual [%]", field:"IRR"},
+      {title:"Total[%]", field:"TRR", width:420, formatter:"progress", formatterParams:{color:["#DE2D26", "#E6550D", "#2CA25F"], legend: true, legendAlign: "left"}, sorter:"number"}
+      ],
+    data: survey_trr_t
+  });
 
 }); 
 

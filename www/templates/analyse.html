@@ -50,20 +50,17 @@
         <div class="row" style = "margin-top: 40px;">
           <div class="col-md-10 mb-1"> 
             <div style = "margin-bottom: 10px; border: 2px dashed rgb(200,200,200); ">
-              <div style = "margin-right: 35px; height:30px;"> 
-                <h4 style = "margin-left: 10px;"><i class="fa fa-bullseye icostyle_menu" style="margin-bottom: 10px; margin-left: 10px;"></i> Response rates</h4>
-                <div style = "font-weight: 400; margin-left: 20px; fint-size: 120%;">
-                  Household: <span class = "defcol" id="anhrr">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  Individual: <span class = "defcol" id="anirr">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div style = "margin-right: 35px; height:120px;"> 
+                <h4 style = "margin-left: 20px;"><i class="fa fa-bullseye icostyle_menu" style="margin-bottom: 10px; margin-left: 10px;"></i> Overall response rates</h4>
+                <div style = "font-weight: 400; margin-left: 20px; font-size: 120%;">
+                  Household: <span class = "defcol" id="anhrr">0</span><br/>
+                  Individual: <span class = "defcol" id="anirr">0</span><br/>
                   Total: <span class = "defcol" id="antrr">0</span>
                 </div>
               </div>
-              <div style = "margin-right: 35px; margin-top: 60px; height:150px; margin-bottom: 20px;">
-              <canvas id="rr" style = "margin-left: 20px;"></canvas>
-            </div>
               <div style = "height:300px; margin-bottom: 50px; margin-right: 40px;">
               <h4 style = "margin-left: 20px;"><i class="fa fa-bullseye icostyle_menu" style="margin-left: 10px;"></i> Response rates by region</h4>
-              <canvas id="regrr" style = "margin-left: 20px;  margin-top: 20px;"></canvas>
+              <div id="regrr" style = "margin-left: 30px; margin-top: 20px;"></div>
             </div>
               <div style = "height:310px; margin-bottom: 20px; margin-right: 20px;">
               <h4 style = "margin-left: 30px;"><i class="fa fa-bullseye icostyle_menu" style="margin-left: 10px;"></i> Response rates by town</h4>
@@ -81,7 +78,7 @@
             <form name = "analysisform"> 
               <div class="formcontainer">
                 <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
-                  <h4 style = "position: relative; left: 10px;"><i class="fa fa-sliders icostyle_menu"></i> Parameters for comparisons</h4>
+                  <h4 style = "margin-left: 20px;"><i class="fa fa-sliders icostyle_menu"></i> Parameters for comparisons</h4>
                   <div style="width: 100%; padding-left:0px; font-weight: 800; margin-bottom: 10px; margin-left: 18px;">
                     <span class= "defcol">
                       <label style = "margin-left: 10px;">Outcome<select id = "anvar" class="form-control" name="anvar" style = "width: 880px;"></select></label>
@@ -106,7 +103,7 @@
         <div class="row" >
           <div class="col-md-10 mb-1">
             <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
-              <h4><i class="fa fa-sliders icostyle_menu"></i> Estimates</h4>
+              <h4 style = "margin-left: 20px;"><i class="fa fa-sliders icostyle_menu"></i> Estimates</h4>
                 <h4 >Sample estimates</h4>
                 <div id ="ansamplestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
                   <img src = "img/placeholder_2.png"></img>

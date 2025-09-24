@@ -857,9 +857,9 @@ server <- function(input, output, session) {
                 dd <- subset(d, REGION == r)
                 x1 <- dd[!duplicated(dd$HID), ]$HR
                 hconsent1 <- length(x1[x1 == "Consent"])
+                hconsent2 <- round(hconsent1/length(x1) * 100, 1)
                 iconsent1 <- length(dd$IR[!is.na(dd$IR) & dd$IR == "Consent"])
-                hconsent2 <- round(hconsent1/length(unique(dd$HID)) * 100, 1)
-                iconsent2 <- round((iconsent1 / length(unique(dd$IID)))/(hconsent1 / length(unique(dd$HID))) *100,1)
+                iconsent2 <- round((iconsent1 / length(dd$IID))/(hconsent1/length(x1))*100,1)
                 HRESPRATE_REGION <- c(HRESPRATE_REGION, ifelse(is.finite(hconsent2), hconsent2, 0))
                 IRESPRATE_REGION <- c(IRESPRATE_REGION, ifelse(is.finite(iconsent2), iconsent2, 0))
               }
@@ -890,6 +890,9 @@ server <- function(input, output, session) {
               RESPONSES <- subset(RESPONSES, tcode %in% input$survey_collect_trigger)
               RESPONSES$tcode <- NULL
 
+              save(RESPRATES_REGION, file = "RR.RData")
+              
+              
               if (input$strategy_sample == 1) {
                 RESPONSES <- merge(RESPONSES, session$userData$survey_probs, by = c("IID"))
               }
@@ -1304,22 +1307,29 @@ server <- function(input, output, session) {
     uthrp <- matrix(uthrp, nrow = 3, ncol = 3, byrow = TRUE)
     uthrp <- uthrp / rowSums(uthrp)
     HRR <<- round(uthrp,2)
-    HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
+    HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(format(HRR, nsmall = 2))))
     
     utirp <- as.numeric(data[c(14:22,24:32)])
     utirp <- pmax(0, pmin(1, utirp))
     utirp <- matrix(utirp, nrow = 2, ncol = 9, byrow = TRUE)
     IRR <<- round(utirp,2)
-    IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
+    IRRDF <- t(cbind(sex = c("Males","Females"), data.frame(format(IRR, nsmall = 2))))
     
     utrrp <- as.numeric(data[c(33:37)])
     RRR <<- round(utrrp,2)
-    RRRDF <- t(data.frame(RRR))
+    RRRDF <- t(data.frame(format(RRR, nsmall = 2)))
 
-    FATIG <<- max(1,round(as.numeric(data[38]),2))
+    FATIG <<- max(1,format(round(as.numeric(data[38]),2), nsmall=2))
     RGEN <<- data[39]
     
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
+    showNotification(
+      ui = "Settings updated",
+      duration = 8,
+      closeButton = TRUE,
+      type = "message"
+    )
+    
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,1))
   })
   
   observeEvent(input$default_settings_trigger, {
@@ -1344,7 +1354,7 @@ server <- function(input, output, session) {
       RRRDF <- t(data.frame(RRR))
     }
 
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,0))
   })
   
   # TRANSFER GLOBAL PARAMETERS TO JAVASCRIPT CODE

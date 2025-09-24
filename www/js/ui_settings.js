@@ -76,18 +76,18 @@ function updateSettings() {
   let rseed = document.getElementById("randomseeds").value;
   
   Shiny.setInputValue('update_settings',[[uthrp1],[utirp1],[utrrp1],[fatig],[rseed]]);
-  
 }
 
-function resetSettings() {
-  let m = 1 + Math.abs(Math.random());
-  Shiny.setInputValue('default_settings_trigger', m);
+function resetSettings(type) {
+  if (type == "default") {
+    let m = 1 + Math.abs(Math.random());
+    Shiny.setInputValue('default_settings_trigger', m);
+  } else if (type == "perfect") {
+    let m = -1*Math.abs(Math.random()) - 1;
+    Shiny.setInputValue('default_settings_trigger', m);
+  }
 }
 
-function resetSettingsPerfect() {
-  let m = -1*Math.abs(Math.random()) - 1;
-  Shiny.setInputValue('default_settings_trigger', m);
-}
 
 
 
