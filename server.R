@@ -890,9 +890,6 @@ server <- function(input, output, session) {
               RESPONSES <- subset(RESPONSES, tcode %in% input$survey_collect_trigger)
               RESPONSES$tcode <- NULL
 
-              save(RESPRATES_REGION, file = "RR.RData")
-              
-              
               if (input$strategy_sample == 1) {
                 RESPONSES <- merge(RESPONSES, session$userData$survey_probs, by = c("IID"))
               }
