@@ -65,7 +65,7 @@ tursoExecute <- function(database, sql_query) { # execute a sql query (and close
 
 tursoExecute(TURSODB, sql_query)
 
-# UPLOD COMPLETE USER BASE TO TURSO
+# UPLOAD COMPLETE USER BASE TO TURSO
 
 df <- user_base
 

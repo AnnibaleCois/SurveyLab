@@ -56,6 +56,27 @@ Shiny.addCustomMessageHandler("handler_settings_tables",
   
   document.getElementById("fatiguecoeff").value = data[3];
   document.getElementById("randomseeds").value = data[4];
+  document.getElementById("paccess").value = data[5];
+
+  let paccess = data[5];
+  
+  if (paccess == "HIDE") {
+    document.getElementById("eoutcome_auto").checked = false;
+    document.getElementById("pauto").style.visibility = "hidden";
+    document.getElementById("popestbox").style.display = "none";
+  } else if (paccess == "SHOWALL") { 
+    document.getElementById("pauto").style.visibility = "visible";
+    document.getElementById("popestbox").style.display = "block";
+  } else {
+    if (adminstatus == "admin") {
+     document.getElementById("pauto").style.visibility = "visible";
+     document.getElementById("popestbox").style.display = "block"; 
+    } else {
+     document.getElementById("eoutcome_auto").checked = false;
+     document.getElementById("pauto").style.visibility = "hidden";
+     document.getElementById("popestbox").style.display = "none";
+    }
+  }
  }
 );
 
@@ -74,8 +95,9 @@ function updateSettings() {
 
   let fatig = document.getElementById("fatiguecoeff").value;
   let rseed = document.getElementById("randomseeds").value;
+  let paccess = document.getElementById("paccess").value;
   
-  Shiny.setInputValue('update_settings',[[uthrp1],[utirp1],[utrrp1],[fatig],[rseed]]);
+  Shiny.setInputValue('update_settings',[[uthrp1],[utirp1],[utrrp1],[fatig],[rseed],[paccess]]);
 }
 
 function resetSettings(type) {

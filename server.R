@@ -62,9 +62,11 @@ server <- function(input, output, session) {
   observe({
     if (credentials()$user_auth) {
       removeCssClass(selector = "body", class = "sidebar-collapse")
+      runjs("adminstatus = 'standard'")
       if (AUTHENTICATE) {
         removeCssClass(id = "account", class = "invisible")
         if (credentials()$info[3] == "admin") {
+          runjs("adminstatus = 'admin'")          
           #removeCssClass(selector = "a[data-value='interviews']", class = "inactiveItem")
           #removeCssClass(selector = "a[data-value='custitems']", class = "inactiveItem")
           removeCssClass(selector = "a[data-value='settings']", class = "inactiveItem")
@@ -72,7 +74,7 @@ server <- function(input, output, session) {
           removeCssClass(selector = "a[data-value='visualise']", class = "inactiveItem")
           removeCssClass(selector = "a[data-value='logs']", class = "inactiveItem")
           updateNumericInput(inputId = "userbase_updated_trigger",value = rnorm(1))
-        }  
+        } 
       }
       removeCssClass(id = "m_logo", class = "invisible")
       removeCssClass(id = "m_credits", class = "invisible")
@@ -144,9 +146,22 @@ server <- function(input, output, session) {
   observeEvent(
     menuObserved(),
     {
+      ad <- ifelse(is.null(credentials()$info[3]), FALSE, credentials()$info[3] == "admin")
       q <- ifelse(is.null(input$tool_items), FALSE, str_length(input$tool_items) > 0)
       s <- ifelse(is.null(input$sam_currentSample_ilist), FALSE, str_length(input$sam_currentSample_ilist) > 0)
       p <- ifelse(is.null(input$survey_collected), FALSE, str_length(input$survey_collected) > 0)
+      
+      if (ad) {
+        removeCssClass(selector = "a[data-value='users']", class = "inactiveItem")
+        removeCssClass(selector = "a[data-value='logs']", class = "inactiveItem")
+        removeCssClass(selector = "a[data-value='settings']", class = "inactiveItem")
+        removeCssClass(selector = "a[data-value='visualise']", class = "inactiveItem")
+      } else {
+        addCssClass(selector = "a[data-value='users']", class = "inactiveItem")
+        addCssClass(selector = "a[data-value='logs']", class = "inactiveItem")
+        addCssClass(selector = "a[data-value='settings']", class = "inactiveItem")
+        addCssClass(selector = "a[data-value='visualise']", class = "inactiveItem")
+      }
       if (q & s) {
         removeCssClass(selector = "a[data-value='power']", class = "inactiveItem")
         removeCssClass(selector = "a[data-value='survey']", class = "inactiveItem")
@@ -1318,6 +1333,7 @@ server <- function(input, output, session) {
 
     FATIG <<- max(1,format(round(as.numeric(data[38]),2), nsmall=2))
     RGEN <<- data[39]
+    PACCESS <- data[40]
     
     showNotification(
       ui = "Settings updated",
@@ -1326,7 +1342,7 @@ server <- function(input, output, session) {
       type = "message"
     )
     
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,1))
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,PACCESS,1))
   })
   
   observeEvent(input$default_settings_trigger, {
@@ -1336,6 +1352,7 @@ server <- function(input, output, session) {
       RRR <<- RRR_DEFAULT
       FATIG <<- FATIG_DEFAULT
       RGEN <<- RGEN_DEFAULT
+      PACCESS <<- PACCESS_DEFAULT
       HRRDF <- t(cbind(wealth = c("I","II","III"),data.frame(HRR)))
       IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
       RRRDF <- t(data.frame(RRR))
@@ -1351,7 +1368,7 @@ server <- function(input, output, session) {
       RRRDF <- t(data.frame(RRR))
     }
 
-    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,0))
+    session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,PACCESS,0))
   })
   
   # TRANSFER GLOBAL PARAMETERS TO JAVASCRIPT CODE
@@ -1369,7 +1386,7 @@ server <- function(input, output, session) {
   IRRDF <- t(cbind(sex = c("Males","Females"),data.frame(IRR)))
   RRRDF <- t(data.frame(RRR))
 
-  session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN))
+  session$sendCustomMessage("handler_settings_tables", list(HRRDF,IRRDF,RRRDF,FATIG,RGEN,PACCESS,2))
 
   # SERVICE VARIABLES
   

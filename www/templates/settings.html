@@ -48,6 +48,20 @@
               </div>
               </form>
             </div>
+            <div style = "border: 2px dashed rgb(200,200,200); padding:10px; margin-top: 20px;">
+              <h4><i class="fa fa-people icostyle_menu" style="margin-bottom: 10px; margin-left: 20px;"></i> Population estimates</h4>
+              <form name = "popaccess"> 
+                <div class="formcontainer">
+              <span class= "defcol">
+                <select id = "paccess" class="form-control" name="paccess" style = "position: relative; width: 250px; left: 20px;" >
+                   <option value="HIDE">Hide</option>                  
+                   <option value="SHOWALL">Show for everybody</option>
+                   <option value="SHOWADMIN">Show for administrators</option>
+                </select>
+                </span>
+              </div>
+              </form>
+            </div>
           </div>
           <div class="col-md-3 mb-1"> 
           <button id ="update_settings" type="button" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg" style = "position:relative; width: 100%; border-color: #FFFFFF; margin-right:10px; color:#FFFFFF;" onclick="updateSettings()">SAVE</button>

@@ -16,4 +16,5 @@ QMPROGRESS_DEFAULT,numeric,5,Parameter for ui progress bar - multiplier of base 
 QMSCALE_DEFAULT,numeric,20,Parameter for ui progress bar - divisor for visual speed of the sampling process
 ALPHA_DEFAULT,numeric,0.05,Level of significance 
 RGEN_DEFAULT,string,RANDOM,Random number generator setting
-NPART_DEFAULT,numeric,40,Max number of users in visualisation plot
+NPART_DEFAULT,numeric,30,Max number of users in visualisation plot
+PACCESS_DEFAULT,string,HIDE,Allow access to underlying population (HIDE = no access; SHOWADMIN = access for administrators; SHOWALL = acecss for everybody

@@ -78,7 +78,7 @@
             <form name = "analysisform"> 
               <div class="formcontainer">
                 <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
-                  <h4 style = "margin-left: 20px;"><i class="fa fa-sliders icostyle_menu"></i> Parameters for comparisons</h4>
+                  <h4 style = "margin-left: 20px;"><i class="fa fa-sliders icostyle_menu"></i> Estimation parameters</h4>
                   <div style="width: 100%; padding-left:0px; font-weight: 800; margin-bottom: 10px; margin-left: 18px;">
                     <span class= "defcol">
                       <label style = "margin-left: 10px;">Outcome<select id = "anvar" class="form-control" name="anvar" style = "width: 880px;"></select></label>
@@ -104,20 +104,22 @@
           <div class="col-md-10 mb-1">
             <div style="margin-top: 20px; padding:10px; border: 2px dashed rgb(200,200,200);">
               <h4 style = "margin-left: 20px;"><i class="fa fa-sliders icostyle_menu"></i> Estimates</h4>
-                <h4 >Sample estimates</h4>
+                <h4 style = "padding-left: 50px;">Sample estimates</h4>
                 <div id ="ansamplestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
                   <img src = "img/placeholder_2.png"></img>
                 </div>
-                <h4> Population true values</h4>
-                <div id ="anpopestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
-                  <img src = "img/placeholder_2.png">
-                  </img></div>
+                <div id = "popestbox" style = "display: none;">
+                  <h4 style = "padding-left: 50px;">Population parameters</h4>
+                  <div id ="anpopestimates" style = "margin-bottom: 20px; margin-left: 20px; margin-right: 20px; text-align: center;">
+                    <img src = "img/placeholder_2.png">
+                    </img>
+                  </div>
+                </div>
             </div>
             </div>
           <div class="col-md-2">
-            <h4 class = "defcol" style = "margin-top: 30px; margin-bottom: 10px; ">Comparison</h4>
             <div style = "box-shadow:none; position: relative; left: 0px; color:#FFFFFF;">
-              <button type="button" id="calc_power" onclick="sampleAnalysis(analysisform); popAnalysis(analysisform);" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg"  style = "position:relative; width: 160px; border-color: #000000;">COMPARE</button>
+              <button type="button" id="calc_power" onclick="sampleAnalysis(analysisform); popAnalysis(analysisform);" class="map-control map-control-zoomout buttonzoom btn btn-outline-primary btn-lg"  style = "position:relative; width: 160px; border-color: #000000;">CALCULATE</button>
             </div>
           </div>
         </div>              

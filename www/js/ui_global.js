@@ -1,6 +1,10 @@
 /* User interface scripts - global variables, v 4.0, 10/06/2025 */
 /* Annibale Cois (annibale.cois@mrc.ac.za) */    
 
+// User privileges
+
+let adminstatus = "standard";
+
 // Interface status
 
 let int_currentTown_sample = 1;

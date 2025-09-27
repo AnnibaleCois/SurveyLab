@@ -114,7 +114,7 @@ loadRData <- function(fileName) { # loads an RData file, and returns it
 # AUTHENTICATION 
 # AUTHTYPE: "dbase" = USES SQL lite DATABASE HOSTED ON SERVER (file: "users/user_data.sqlite"); 
 #           "cloud" = USES SQL lite DATABASE HOSTED ON CLOUD (URL and TOKEN as environment variables TURSO_DB_URL, TURSO_AUTH_TOKEN); 
-#            "test" = USES user_data.RData DATABASE STORED INTERNALLY (ONLY for testing, don not support concurrent access)
+#           "test" = USES user_data.RData DATABASE STORED INTERNALLY (ONLY for testing, does not support concurrent access)
 
 AUTHENTICATE <- TRUE 
 AUTHTYPE <- "cloud"                    
@@ -197,6 +197,7 @@ QMSCALE <- QMSCALE_DEFAULT
 ALPHA <- ALPHA_DEFAULT
 RGEN <- RGEN_DEFAULT
 NPART <- NPART_DEFAULT
+PACCESS <- PACCESS_DEFAULT
 
 # LOAD WORLD MAP
 
